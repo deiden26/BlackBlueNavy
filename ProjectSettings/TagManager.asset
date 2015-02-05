@@ -4,6 +4,8 @@
 TagManager:
   tags:
   - 
+  - 
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -40,4 +42,12 @@ TagManager:
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: Background
+    userID: 2
+    uniqueID: 2858339409
+    locked: 0
+  - name: Penguin
+    userID: 1
+    uniqueID: 3140825403
     locked: 0
