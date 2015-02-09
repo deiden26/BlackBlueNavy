@@ -7,10 +7,9 @@ public class levelTiler : MonoBehaviour {
 
 	private Dictionary<string,Queue<GameObject>> roomPools;
 	private string roomName; //temporary
-	private float screenWidthInPoints;
 	private Vector3 nextPosition;
 	private Transform penguinTransform;
-
+	private float spriteWidth;
 	// Use this for initialization
 	void Start () {
 		//Initialize next position
@@ -18,9 +17,8 @@ public class levelTiler : MonoBehaviour {
 		//Cache reference to penguin transform
 		GameObject penguin = GameObject.Find ("penguin");
 		penguinTransform = penguin.transform;
-		//Get width of screen
-		float height = 2.0f * Camera.main.orthographicSize;
-		screenWidthInPoints = height * Camera.main.aspect;
+		//Cache sprite width
+		spriteWidth = availableBackgrounds[0].renderer.bounds.size.x;
 		//Initialize the dictionary of room pools
 		roomPools = new Dictionary<string, Queue<GameObject>>();
 		//For each type of room...
@@ -39,7 +37,7 @@ public class levelTiler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//If the penguin is halfway through a room...
-		if (penguinTransform.position.x + screenWidthInPoints >= nextPosition.x)
+		if (penguinTransform.position.x + spriteWidth >= nextPosition.x)
 			//Take the room that just went out of view and put it infront of the penguin
 			recycleBackgrounds (roomName);
 	}
