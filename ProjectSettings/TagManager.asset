@@ -5,6 +5,11 @@ TagManager:
   tags:
   - floor
   - room
+  - Penguin
+  - midRoomTrigger
+  - nextRoomTrigger0
+  - nextRoomTrigger1
+  - nextRoomTrigger2
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

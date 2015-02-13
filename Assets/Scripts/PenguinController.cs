@@ -28,8 +28,7 @@ public class PenguinController : MonoBehaviour {
 
 	void FixedUpdate () {
 		if (Input.GetButton ("Jump") && grounded) {
-			rigidbody2D.AddForce (jumpForce, ForceMode2D.Impulse);
-			//grounded = false;
+			rigidbody2D.AddForce (jumpForce, ForceMode2D.Impulse);;
 		}
 		rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
 	}
@@ -39,11 +38,18 @@ public class PenguinController : MonoBehaviour {
 		GameObject floor = GameObject.Find ("floor");
 	}
 
-	void OnCollisionStay2D(Collision2D other) {
+	void OnCollisionEnter2D(Collision2D other) {
 		if(other.gameObject.CompareTag("floor")) {
 		   grounded = true;
 		}
 	}
+
+	void OnCollisionExit2D(Collision2D other) {
+		if(other.gameObject.CompareTag("floor")) {
+			grounded = false;
+		}
+	}
+	
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.CompareTag("nextRoomTrigger0") || other.CompareTag("nextRoomTrigger1") || other.CompareTag("nextRoomTrigger2")) {
 			onEnterRoom(other.tag, other.transform.position.x);
