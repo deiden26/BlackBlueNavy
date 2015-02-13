@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 
 public class roomNode {
+
 	/*~~~~~~ public variables~~~~~~*/
-	public string roomColor;
+	public string roomTile;
 	public float roomSize;
 	public List<roomNode> roomAdj;
 	public List<KeyValuePair<Vector3, string>> roomObjectsInfo;
@@ -19,6 +20,9 @@ public class roomNode {
 }
 
 public class roomManager : MonoBehaviour {
+
+	public delegate void roomChangeAction(string roomTile);
+	public static event roomChangeAction onRoomChange;
 
 	/*~~~~~~ public variables~~~~~~*/
 
@@ -53,7 +57,7 @@ public class roomManager : MonoBehaviour {
 		roomNode room1 = new roomNode();
 		roomNode room2 = new roomNode();
 
-		room1.roomColor = "hallwayDay";
+		room1.roomTile = "roomDay";
 		room1.roomSize = 100;
 		Vector3 nextRoomTrigPos =  new Vector3 (room1.roomSize, 0, 0);
 		Vector3 midRoomTrigPos =  new Vector3 (room1.roomSize/2, 0, 0);
@@ -61,7 +65,7 @@ public class roomManager : MonoBehaviour {
 		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
 		room1.roomAdj.Add (room2);
 
-		room2.roomColor = "hallwaynight";
+		room2.roomTile = "roomNight";
 		room2.roomSize = 100;
 		nextRoomTrigPos =  new Vector3 (room1.roomSize, 0, 0);
 		midRoomTrigPos =  new Vector3 (room1.roomSize/2, 0, 0);
@@ -77,6 +81,8 @@ public class roomManager : MonoBehaviour {
 
 		//Place all objects for the first room
 		placeNewRoomObjects ();
+		//Alert level tiler of roomTile
+		onRoomChange(currentNode.roomTile);
 	}
 	
 	// Update is called once per frame
@@ -86,18 +92,29 @@ public class roomManager : MonoBehaviour {
 	/*~~~~~~ public functions ~~~~~~*/
 
 	public void enterRoom(string tag, float newRoomPosX) {
-		//If colliding with an end-of-room trigger
+		//Set current node to previous node
+		prevNode = currentNode;
+		Debug.Log ("Entered next room");
+
 		if (tag == "nextRoomTrigger0") {
-			Debug.Log ("Entered next room");
-			//Set current node to previous node
-			prevNode = currentNode;
 			//Set current node to next node TODO: multiple ways to go
 			currentNode = currentNode.roomAdj [0];
-			//Update roomStartPos
-			roomStartPosX = newRoomPosX;
-			//Instantiate objects for new room
-			placeNewRoomObjects ();
 		}
+		else if (tag == "nextRoomTrigger1") {
+			//Set current node to next node TODO: multiple ways to go
+			currentNode = currentNode.roomAdj [1];
+		}
+		else if (tag == "nextRoomTrigger2") {
+			//Set current node to next node TODO: multiple ways to go
+			currentNode = currentNode.roomAdj [1];
+		}
+
+		//Update roomStartPos
+		roomStartPosX = newRoomPosX;
+		//Instantiate objects for new room
+		placeNewRoomObjects ();
+		//Alert subscribers that you have changed the room
+		onRoomChange(currentNode.roomTile);
 	}
 
 	public void midRoom() {

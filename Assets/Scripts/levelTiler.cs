@@ -6,10 +6,10 @@ public class levelTiler : MonoBehaviour {
 	public GameObject[] availableBackgrounds;
 
 	private Dictionary<string,Queue<GameObject>> roomPools;
-	private string roomName; //temporary
 	private Vector3 nextPosition;
 	private Transform penguinTransform;
 	private float spriteWidth;
+	private string currentRoomTile;
 	// Use this for initialization
 	void Start () {
 		//Initialize next position
@@ -25,13 +25,12 @@ public class levelTiler : MonoBehaviour {
 		foreach (GameObject room in availableBackgrounds) {
 			//Create a queue in the dictionary
 			roomPools.Add(room.name, new Queue<GameObject>());
-			roomName = room.name;
 			//And instantiate 2 copies of the room type into the queue
 			for(int i=0; i<2; i++)
 				roomPools[room.name].Enqueue((GameObject)Instantiate(room, new Vector3(-100,0,0), Quaternion.identity));
 		}
 		//Load the first room
-		recycleBackgrounds (roomName);
+		recycleBackgrounds (currentRoomTile);
 	}
 	
 	// Update is called once per frame
@@ -39,9 +38,24 @@ public class levelTiler : MonoBehaviour {
 		//If the penguin is halfway through a room...
 		if (penguinTransform.position.x + spriteWidth >= nextPosition.x)
 			//Take the room that just went out of view and put it infront of the penguin
-			recycleBackgrounds (roomName);
+			recycleBackgrounds (currentRoomTile);
 	}
 
+	void OnEnable()
+	{
+		roomManager.onRoomChange += changeRoom;
+	}
+	
+	
+	void OnDisable()
+	{
+		roomManager.onRoomChange -= changeRoom;
+	}
+
+	
+	private void changeRoom(string newRoomTile) {
+		currentRoomTile = newRoomTile;
+	}
 
 	private void recycleBackgrounds(string roomType) {
 		//Get next room from pool
