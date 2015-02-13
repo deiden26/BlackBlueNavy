@@ -6,11 +6,14 @@ public class PenguinController : MonoBehaviour {
 	public float forwardVelocity;
 	public Vector3 jumpForce;
 
+	private roomManager roomController; 
 	private bool grounded;
 
 	// Use this for initialization
 	void Start () {
 		rigidbody2D.velocity = new Vector3 (1, 0, 0) * forwardVelocity;
+		GameObject roomControllerObj = GameObject.Find("roomManager");
+		roomController = (roomManager) roomControllerObj.GetComponent(typeof(roomManager));
 	}
 
 	void FixedUpdate () {
@@ -29,6 +32,14 @@ public class PenguinController : MonoBehaviour {
 	void OnCollisionStay2D(Collision2D other) {
 		if(other.gameObject.CompareTag("floor")) {
 		   grounded = true;
+		}
+	}
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.CompareTag("nextRoomTrigger0") || other.CompareTag("nextRoomTrigger1") || other.CompareTag("nextRoomTrigger2")) {
+			roomController.enterRoom(other.tag, other.transform.position.x);
+		}
+		else if(other.CompareTag("midRoomTrigger")) {
+			roomController.midRoom();
 		}
 	}
 	
