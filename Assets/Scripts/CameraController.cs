@@ -2,13 +2,15 @@
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
+	
+	/*~~~~~~ private variables ~~~~~~*/
 
-	public PenguinController penguin;
-
+	private PenguinController penguin;
 	private Vector3 nextPosition;
 	private Transform penguinTransform;
 
-	// Use this for initialization
+	/*~~~~~~ unity functions ~~~~~~*/
+	
 	void Start () {
 		//Cache reference to penguin transform
 		GameObject penguin = GameObject.Find ("penguin");
@@ -16,8 +18,7 @@ public class CameraController : MonoBehaviour {
 		//Initialize next position
 		nextPosition = camera.transform.position;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		//Track penguins motion in the x direction
 		nextPosition.x = penguinTransform.position.x;

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 
 
+/*##########################################*/
+/* roomNode data type                       */
+/*##########################################*/
+
+
 public class roomNode {
 
 	/*~~~~~~ public variables~~~~~~*/
@@ -19,12 +24,18 @@ public class roomNode {
 	}
 }
 
+/*##########################################*/
+/* roomManager class                        */
+/*##########################################*/
+
 public class roomManager : MonoBehaviour {
+
+	/*~~~~~~ events ~~~~~~*/
 
 	public delegate void roomChangeAction(string roomTile);
 	public static event roomChangeAction onRoomChange;
 
-	/*~~~~~~ public variables~~~~~~*/
+	/*~~~~~~ public variables ~~~~~~*/
 
 	public roomNode currentNode;
 
@@ -87,6 +98,19 @@ public class roomManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {;
+	}
+
+	void OnEnable()
+	{
+		PenguinController.onEnterRoom += enterRoom;
+		PenguinController.onMidRoom += midRoom;
+	}
+	
+	
+	void OnDisable()
+	{
+		PenguinController.onEnterRoom -= enterRoom;
+		PenguinController.onMidRoom -= midRoom;
 	}
 
 	/*~~~~~~ public functions ~~~~~~*/

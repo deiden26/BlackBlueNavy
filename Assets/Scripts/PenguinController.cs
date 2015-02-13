@@ -3,23 +3,33 @@ using System.Collections.Generic;
 
 public class PenguinController : MonoBehaviour {
 
+	/*~~~~~~ events ~~~~~~*/
+	
+	public delegate void enterRoomAction(string tag, float newRoomPosX);
+	public static event enterRoomAction onEnterRoom;
+
+	public delegate void midRoomAction();
+	public static event midRoomAction onMidRoom;
+
+	/*~~~~~~ public variables~~~~~~*/
+
 	public float forwardVelocity;
 	public Vector3 jumpForce;
 
-	private roomManager roomController; 
+	/*~~~~~~ private variables ~~~~~~*/
+
 	private bool grounded;
 
-	// Use this for initialization
+	/*~~~~~~ unity functions ~~~~~~*/
+	
 	void Start () {
 		rigidbody2D.velocity = new Vector3 (1, 0, 0) * forwardVelocity;
-		GameObject roomControllerObj = GameObject.Find("roomManager");
-		roomController = (roomManager) roomControllerObj.GetComponent(typeof(roomManager));
 	}
 
 	void FixedUpdate () {
 		if (Input.GetButton ("Jump") && grounded) {
 			rigidbody2D.AddForce (jumpForce, ForceMode2D.Impulse);
-			grounded = false;
+			//grounded = false;
 		}
 		rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
 	}
@@ -36,10 +46,10 @@ public class PenguinController : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.CompareTag("nextRoomTrigger0") || other.CompareTag("nextRoomTrigger1") || other.CompareTag("nextRoomTrigger2")) {
-			roomController.enterRoom(other.tag, other.transform.position.x);
+			onEnterRoom(other.tag, other.transform.position.x);
 		}
 		else if(other.CompareTag("midRoomTrigger")) {
-			roomController.midRoom();
+			onMidRoom();
 		}
 	}
 	
