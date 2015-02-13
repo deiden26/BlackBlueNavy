@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour {
 
 	void Update () {
 		//Track penguins motion in the x direction
-		nextPosition.x = penguinTransform.position.x;
+		nextPosition.x = penguinTransform.position.x + 5;
 		camera.transform.position = nextPosition;
 	}
 }

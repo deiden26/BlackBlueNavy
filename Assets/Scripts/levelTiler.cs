@@ -11,7 +11,7 @@ public class levelTiler : MonoBehaviour {
 
 	private Dictionary<string,Queue<GameObject>> roomTilePools;
 	private Vector3 nextTilePosition;
-	private Transform penguinTransform;
+	private Transform cameraTransform;
 	private string currentRoomTile;
 
 
@@ -20,10 +20,10 @@ public class levelTiler : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Initialize next position
-		nextTilePosition = new Vector3 (0, 0, 0);
+		nextTilePosition = new Vector3 (5, 0, 0);
 		//Cache reference to penguin transform
-		GameObject penguin = GameObject.Find ("penguin");
-		penguinTransform = penguin.transform;
+		GameObject camera = GameObject.Find ("camera");
+		cameraTransform = camera.transform;
 		//Initialize the dictionary of tile pools
 		roomTilePools = new Dictionary<string, Queue<GameObject>>();
 		//For each type of tile...
@@ -43,7 +43,7 @@ public class levelTiler : MonoBehaviour {
 		//Get the width of the tile we're currently 
 		float spriteWidth = roomTilePools[currentRoomTile].Peek().renderer.bounds.size.x;
 		//If the penguin is halfway through a tile...
-		if (penguinTransform.position.x + spriteWidth >= nextTilePosition.x)
+		if (cameraTransform.position.x + spriteWidth >= nextTilePosition.x)
 			//Take the til that just went out of view and put it infront of the penguin
 			recycleBackgrounds (currentRoomTile);
 	}
