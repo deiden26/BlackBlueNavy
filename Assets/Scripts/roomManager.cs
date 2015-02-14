@@ -67,22 +67,34 @@ public class roomManager : MonoBehaviour {
 		//Create temporary hard-coded room nodes
 		roomNode room1 = new roomNode();
 		roomNode room2 = new roomNode();
+		roomNode room3 = new roomNode();
 
-		room1.roomTile = "roomDay";
+		room1.roomTile = "pinkRoom";
 		room1.roomSize = 100;
 		Vector3 nextRoomTrigPos =  new Vector3 (room1.roomSize, 0, 0);
 		Vector3 midRoomTrigPos =  new Vector3 (room1.roomSize/2, 0, 0);
 		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrigPos, "nextRoomTrigger0"));
 		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
 		room1.roomAdj.Add (room2);
+		room1.roomAdj.Add (room3);
 
-		room2.roomTile = "roomNight";
+		room2.roomTile = "purpleRoom";
 		room2.roomSize = 100;
-		nextRoomTrigPos =  new Vector3 (room1.roomSize, 0, 0);
-		midRoomTrigPos =  new Vector3 (room1.roomSize/2, 0, 0);
+		nextRoomTrigPos =  new Vector3 (room2.roomSize, 0, 0);
+		midRoomTrigPos =  new Vector3 (room2.roomSize/2, 0, 0);
 		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrigPos, "nextRoomTrigger0"));
 		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(midRoomTrigPos, "midRoomTrigger"));
+		room2.roomAdj.Add (room3);
 		room2.roomAdj.Add (room1);
+
+		room3.roomTile = "greenRoom";
+		room3.roomSize = 100;
+		nextRoomTrigPos =  new Vector3 (room3.roomSize, 0, 0);
+		midRoomTrigPos =  new Vector3 (room3.roomSize/2, 0, 0);
+		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrigPos, "nextRoomTrigger0"));
+		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
+		room3.roomAdj.Add (room1);
+		room3.roomAdj.Add (room2);
 
 		//Initialize variables to start rendering/instantiating rooms
 		currentNode = room1;
@@ -115,14 +127,17 @@ public class roomManager : MonoBehaviour {
 
 	/*~~~~~~ public functions ~~~~~~*/
 
-	public void enterRoom(string tag, float newRoomPosX) {
+	public void enterRoom(string tag, float newRoomPosX, float penguinPosY) {
 		//Set current node to previous node
 		prevNode = currentNode;
 		Debug.Log ("Entered next room");
 
 		if (tag == "nextRoomTrigger0") {
 			//Set current node to next node TODO: multiple ways to go
-			currentNode = currentNode.roomAdj [0];
+			if (penguinPosY > (Screen.height*(1/2)))
+				currentNode = currentNode.roomAdj [1];
+			else
+				currentNode = currentNode.roomAdj [0];
 		}
 		else if (tag == "nextRoomTrigger1") {
 			//Set current node to next node TODO: multiple ways to go

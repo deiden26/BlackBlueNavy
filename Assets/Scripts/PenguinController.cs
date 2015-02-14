@@ -5,7 +5,7 @@ public class PenguinController : MonoBehaviour {
 
 	/*~~~~~~ events ~~~~~~*/
 	
-	public delegate void enterRoomAction(string tag, float newRoomPosX);
+	public delegate void enterRoomAction(string tag, float newRoomPosX, float penguinPosY);
 	public static event enterRoomAction onEnterRoom;
 
 	public delegate void midRoomAction();
@@ -52,7 +52,7 @@ public class PenguinController : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.CompareTag("nextRoomTrigger0") || other.CompareTag("nextRoomTrigger1") || other.CompareTag("nextRoomTrigger2")) {
-			onEnterRoom(other.tag, other.transform.position.x);
+			onEnterRoom(other.tag, other.transform.position.x, this.transform.position.y);
 		}
 		else if(other.CompareTag("midRoomTrigger")) {
 			onMidRoom();

@@ -479,6 +479,12 @@ MonoBehaviour:
   availableRoomTiles:
   - {fileID: 115922, guid: 141e610ebda7a4da9bd3580a92449eda, type: 2}
   - {fileID: 148796, guid: 551079f6671724e68bcd048206408212, type: 2}
+  - {fileID: 187098, guid: ff6c7b092b5d37240ba18d90b7858d85, type: 2}
+  - {fileID: 127830, guid: d8ccfad6521935d41bee6adeef4972ff, type: 2}
+  - {fileID: 197364, guid: 23054da129096894b9813a043303ef3a, type: 2}
+  - {fileID: 105148, guid: af3a90a25cfb8e1459f14c52a85b78c7, type: 2}
+  - {fileID: 186830, guid: 9c287f3ca6acab84984ad9612952fcf4, type: 2}
+  - {fileID: 164376, guid: f039202955ad9d046a7f14134e555328, type: 2}
 --- !u!4 &1680543055
 Transform:
   m_ObjectHideFlags: 0
