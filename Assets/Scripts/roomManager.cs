@@ -175,7 +175,9 @@ public class roomManager : MonoBehaviour {
 			roomObject.transform.position = roomObjectPos;
 			//If the room object is a nextRoomTrigger
 			if(roomObject.name.Contains("nextRoomTrigger")) {
+				//Create a new tag with the next room index (store which room this trigger takes you too)
 				roomObject.tag = "nextRoomTrigger" + roomTriggerIndex;
+				//Increment next room index in case there is another next room trigger
 				roomTriggerIndex++;
 			}
 			currentNode.placedRoomObjects.Add (roomObject);

@@ -51,8 +51,11 @@ public class PenguinController : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag.Contains("nextRoomTrigger")) {
+			//Remove nextRoomTrigger part of tag to leave only the room index in the tag string
 			string nextRoomIndexString = other.tag.Remove(other.tag.IndexOf("nextRoomTrigger"), "nextRoomTrigger".Length);
+			//Parse the string as an integer
 			int nextRoomIndexInt = int.Parse(nextRoomIndexString);
+			//Enter the next room node at the parsed index
 			onEnterRoom(nextRoomIndexInt, other.transform.position.x);
 		}
 		else if(other.tag.Contains("midRoomTrigger")) {
