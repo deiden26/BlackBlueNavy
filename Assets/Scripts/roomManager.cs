@@ -37,13 +37,12 @@ public class roomManager : MonoBehaviour {
 
 	/*~~~~~~ public variables ~~~~~~*/
 
-	public roomNode currentNode;
-
 	public GameObject[] roomObjectPrefabs;
 	public int[] poolSize;
 
 	/*~~~~~~ private variables ~~~~~~*/
 
+	private roomNode currentNode;
 	private roomNode prevNode;
 	private float roomStartPosX;
 	private Dictionary<string,Queue<GameObject>> roomObjectPools;
@@ -57,10 +56,18 @@ public class roomManager : MonoBehaviour {
 		int poolSizeIndex = 0;
 		foreach (GameObject roomObjectPrefab in roomObjectPrefabs) {
 			//Create a queue in the dictionary
-			roomObjectPools.Add(roomObjectPrefab.tag, new Queue<GameObject>());
-			//And instantiate 20 copies of the room object into the queue
-			for(int i=0; i<poolSize[poolSizeIndex]; i++)
-				roomObjectPools[roomObjectPrefab.tag].Enqueue((GameObject)Instantiate(roomObjectPrefab, new Vector3(-100,0,0), Quaternion.identity));
+			roomObjectPools.Add(roomObjectPrefab.name, new Queue<GameObject>());
+			//And instantiate copies of the room object into the queue
+			GameObject roomObject;
+			for(int i=0; i<poolSize[poolSizeIndex]; i++) {
+				roomObject = (GameObject)Instantiate(roomObjectPrefab, new Vector3(-100,0,0), Quaternion.identity);
+				//Remove "(Clone)" from the game object name
+				int index = roomObject.name.IndexOf("(Clone)");
+				roomObject.name = (index < 0)
+					? roomObject.name
+					: roomObject.name.Remove(index, "(Clone)".Length);
+				roomObjectPools[roomObjectPrefab.name].Enqueue(roomObject);
+			}
 			poolSizeIndex++;
 		}
 
@@ -71,27 +78,33 @@ public class roomManager : MonoBehaviour {
 
 		room1.roomTile = "pinkRoom";
 		room1.roomSize = 100;
-		Vector3 nextRoomTrigPos =  new Vector3 (room1.roomSize, 0, 0);
+		Vector3 nextRoomTrig0Pos =  new Vector3 (room1.roomSize, Camera.main.orthographicSize/2, 0);
+		Vector3 nextRoomTrig1Pos =  new Vector3 (room1.roomSize, -Camera.main.orthographicSize/2, 0);
 		Vector3 midRoomTrigPos =  new Vector3 (room1.roomSize/2, 0, 0);
-		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrigPos, "nextRoomTrigger0"));
+		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
+		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
 		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
 		room1.roomAdj.Add (room2);
 		room1.roomAdj.Add (room3);
 
 		room2.roomTile = "purpleRoom";
 		room2.roomSize = 100;
-		nextRoomTrigPos =  new Vector3 (room2.roomSize, 0, 0);
+		nextRoomTrig0Pos =  new Vector3 (room2.roomSize, Camera.main.orthographicSize/2, 0);
+		nextRoomTrig1Pos =  new Vector3 (room2.roomSize, -Camera.main.orthographicSize/2, 0);
 		midRoomTrigPos =  new Vector3 (room2.roomSize/2, 0, 0);
-		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrigPos, "nextRoomTrigger0"));
+		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
+		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
 		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(midRoomTrigPos, "midRoomTrigger"));
 		room2.roomAdj.Add (room3);
 		room2.roomAdj.Add (room1);
 
 		room3.roomTile = "greenRoom";
 		room3.roomSize = 100;
-		nextRoomTrigPos =  new Vector3 (room3.roomSize, 0, 0);
+		nextRoomTrig0Pos =  new Vector3 (room3.roomSize, Camera.main.orthographicSize/2, 0);
+		nextRoomTrig1Pos =  new Vector3 (room3.roomSize, -Camera.main.orthographicSize/2, 0);
 		midRoomTrigPos =  new Vector3 (room3.roomSize/2, 0, 0);
-		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrigPos, "nextRoomTrigger0"));
+		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
+		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
 		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
 		room3.roomAdj.Add (room1);
 		room3.roomAdj.Add (room2);
@@ -127,27 +140,13 @@ public class roomManager : MonoBehaviour {
 
 	/*~~~~~~ public functions ~~~~~~*/
 
-	public void enterRoom(string tag, float newRoomPosX, float penguinPosY) {
-		//Set current node to previous node
-		prevNode = currentNode;
+	public void enterRoom(int nextRoomIndex, float newRoomPosX) {
 		Debug.Log ("Entered next room");
 
-		if (tag == "nextRoomTrigger0") {
-			//Set current node to next node TODO: multiple ways to go
-			if (penguinPosY > (Screen.height*(1/2)))
-				currentNode = currentNode.roomAdj [1];
-			else
-				currentNode = currentNode.roomAdj [0];
-		}
-		else if (tag == "nextRoomTrigger1") {
-			//Set current node to next node TODO: multiple ways to go
-			currentNode = currentNode.roomAdj [1];
-		}
-		else if (tag == "nextRoomTrigger2") {
-			//Set current node to next node TODO: multiple ways to go
-			currentNode = currentNode.roomAdj [1];
-		}
-
+		//Set current node to previous node
+		prevNode = currentNode;
+		//Set current node to next node
+		currentNode = currentNode.roomAdj [nextRoomIndex];
 		//Update roomStartPos
 		roomStartPosX = newRoomPosX;
 		//Instantiate objects for new room
@@ -165,6 +164,7 @@ public class roomManager : MonoBehaviour {
 	/*~~~~~~ private functions ~~~~~~*/
 
 	private void placeNewRoomObjects(){
+		int roomTriggerIndex = 0;
 		//For each object position and prefab pair in roomObjects
 		foreach (KeyValuePair<Vector3, string> roomObjectPlan in currentNode.roomObjectsInfo) {
 			//Get position of room object to be placed
@@ -173,6 +173,11 @@ public class roomManager : MonoBehaviour {
 			GameObject roomObject = (roomObjectPools[roomObjectPlan.Value]).Dequeue();
 			//Move room object to its new position
 			roomObject.transform.position = roomObjectPos;
+			//If the room object is a nextRoomTrigger
+			if(roomObject.name.Contains("nextRoomTrigger")) {
+				roomObject.tag = "nextRoomTrigger" + roomTriggerIndex;
+				roomTriggerIndex++;
+			}
 			currentNode.placedRoomObjects.Add (roomObject);
 		}
 	}
@@ -180,7 +185,7 @@ public class roomManager : MonoBehaviour {
 		//For every placed room object
 		foreach (GameObject roomObject in prevNode.placedRoomObjects) {
 			//Put the object back into the queue to be reused
-			roomObjectPools[roomObject.tag].Enqueue(roomObject);
+			roomObjectPools[roomObject.name].Enqueue(roomObject);
 		}
 	}
 }

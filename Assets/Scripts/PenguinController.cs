@@ -5,7 +5,7 @@ public class PenguinController : MonoBehaviour {
 
 	/*~~~~~~ events ~~~~~~*/
 	
-	public delegate void enterRoomAction(string tag, float newRoomPosX, float penguinPosY);
+	public delegate void enterRoomAction(int nextRoomIndex, float newRoomPosX);
 	public static event enterRoomAction onEnterRoom;
 
 	public delegate void midRoomAction();
@@ -35,7 +35,6 @@ public class PenguinController : MonoBehaviour {
 
 	void Update () {
 		transform.localRotation = new Quaternion (0, 0, 0, 0);
-		GameObject floor = GameObject.Find ("floor");
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
@@ -51,10 +50,12 @@ public class PenguinController : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
-		if(other.CompareTag("nextRoomTrigger0") || other.CompareTag("nextRoomTrigger1") || other.CompareTag("nextRoomTrigger2")) {
-			onEnterRoom(other.tag, other.transform.position.x, this.transform.position.y);
+		if(other.tag.Contains("nextRoomTrigger")) {
+			string nextRoomIndexString = other.tag.Remove(other.tag.IndexOf("nextRoomTrigger"), "nextRoomTrigger".Length);
+			int nextRoomIndexInt = int.Parse(nextRoomIndexString);
+			onEnterRoom(nextRoomIndexInt, other.transform.position.x);
 		}
-		else if(other.CompareTag("midRoomTrigger")) {
+		else if(other.tag.Contains("midRoomTrigger")) {
 			onMidRoom();
 		}
 	}
