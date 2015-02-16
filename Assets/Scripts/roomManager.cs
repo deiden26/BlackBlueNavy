@@ -76,35 +76,56 @@ public class roomManager : MonoBehaviour {
 		roomNode room2 = new roomNode();
 		roomNode room3 = new roomNode();
 
+		float fourthCamHeight = Camera.main.orthographicSize / 2;
+		float halfCamWidth = Camera.main.orthographicSize * Camera.main.aspect * 2;
+
 		room1.roomTile = "pinkRoom";
 		room1.roomSize = 100;
-		Vector3 nextRoomTrig0Pos =  new Vector3 (room1.roomSize, Camera.main.orthographicSize/2, 0);
-		Vector3 nextRoomTrig1Pos =  new Vector3 (room1.roomSize, -Camera.main.orthographicSize/2, 0);
+		Vector3 nextRoomTrig0Pos =  new Vector3 (room1.roomSize, fourthCamHeight, 0);
+		Vector3 nextRoomTrig1Pos =  new Vector3 (room1.roomSize, -fourthCamHeight, 0);
+		Vector3 pipePos0 =  new Vector3 (room1.roomSize + halfCamWidth, fourthCamHeight, 0);
+		Vector3 pipePos1 =  new Vector3 (room1.roomSize + halfCamWidth, -fourthCamHeight, 0);
+		Vector3 wallPos =  new Vector3 (room1.roomSize + halfCamWidth, 0, 0);
 		Vector3 midRoomTrigPos =  new Vector3 (room1.roomSize/2, 0, 0);
 		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
 		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
+		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(pipePos0, "pipeHalf"));
+		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(pipePos1, "pipeHalf"));
+		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(wallPos, "wall"));
 		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
 		room1.roomAdj.Add (room2);
 		room1.roomAdj.Add (room3);
 
 		room2.roomTile = "purpleRoom";
 		room2.roomSize = 100;
-		nextRoomTrig0Pos =  new Vector3 (room2.roomSize, Camera.main.orthographicSize/2, 0);
-		nextRoomTrig1Pos =  new Vector3 (room2.roomSize, -Camera.main.orthographicSize/2, 0);
+		nextRoomTrig0Pos =  new Vector3 (room2.roomSize, fourthCamHeight, 0);
+		nextRoomTrig1Pos =  new Vector3 (room2.roomSize, -fourthCamHeight, 0);
+		pipePos0 =  new Vector3 (room2.roomSize + halfCamWidth, fourthCamHeight, 0);
+		pipePos1 =  new Vector3 (room2.roomSize + halfCamWidth, -fourthCamHeight, 0);
+		wallPos =  new Vector3 (room2.roomSize + halfCamWidth, 0, 0);
 		midRoomTrigPos =  new Vector3 (room2.roomSize/2, 0, 0);
 		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
 		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
+		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(pipePos0, "pipeHalf"));
+		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(pipePos1, "pipeHalf"));
+		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(wallPos, "wall"));
 		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(midRoomTrigPos, "midRoomTrigger"));
 		room2.roomAdj.Add (room3);
 		room2.roomAdj.Add (room1);
 
 		room3.roomTile = "greenRoom";
 		room3.roomSize = 100;
-		nextRoomTrig0Pos =  new Vector3 (room3.roomSize, Camera.main.orthographicSize/2, 0);
-		nextRoomTrig1Pos =  new Vector3 (room3.roomSize, -Camera.main.orthographicSize/2, 0);
+		nextRoomTrig0Pos =  new Vector3 (room3.roomSize, fourthCamHeight, 0);
+		nextRoomTrig1Pos =  new Vector3 (room3.roomSize, -fourthCamHeight, 0);
+		pipePos0 =  new Vector3 (room3.roomSize + halfCamWidth, fourthCamHeight, 0);
+		pipePos1 =  new Vector3 (room3.roomSize + halfCamWidth, -fourthCamHeight, 0);
+		wallPos =  new Vector3 (room3.roomSize + halfCamWidth, 0, 0);
 		midRoomTrigPos =  new Vector3 (room3.roomSize/2, 0, 0);
 		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
 		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
+		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(pipePos0, "pipeHalf"));
+		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(pipePos1, "pipeHalf"));
+		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(wallPos, "wall"));
 		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
 		room3.roomAdj.Add (room1);
 		room3.roomAdj.Add (room2);
@@ -189,5 +210,7 @@ public class roomManager : MonoBehaviour {
 			//Put the object back into the queue to be reused
 			roomObjectPools[roomObject.name].Enqueue(roomObject);
 		}
+		//Clear out the placed room objecs list
+		prevNode.placedRoomObjects.Clear ();
 	}
 }
