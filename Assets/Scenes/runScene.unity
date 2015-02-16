@@ -107,7 +107,8 @@ MonoBehaviour:
   - {fileID: 168544, guid: 7307fe91d5e2e4f1ba0136236cc0120d, type: 2}
   - {fileID: 125802, guid: 236ae515e002d4a5e93452f0afd28f22, type: 2}
   - {fileID: 149070, guid: fb553dd09670d4ba58644f0c5d46953e, type: 2}
-  poolSize: 0200000004000000060000000200000004000000
+  - {fileID: 139314, guid: bac2255ff4b2b440fb6ddac8f22818b4, type: 2}
+  poolSize: 020000000400000006000000020000000400000002000000
 --- !u!4 &409843371
 Transform:
   m_ObjectHideFlags: 0
