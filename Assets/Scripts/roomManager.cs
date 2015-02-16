@@ -12,6 +12,7 @@ public class roomNode {
 	/*~~~~~~ public variables~~~~~~*/
 	public string roomTile;
 	public float roomSize;
+	public bool taken;
 	public List<roomNode> roomAdj;
 	public List<KeyValuePair<Vector3, string>> roomObjectsInfo;
 	public List<GameObject> placedRoomObjects;
@@ -44,6 +45,7 @@ public class roomManager : MonoBehaviour {
 
 	private roomNode currentNode;
 	private roomNode prevNode;
+	private roomNode endNode;
 	private float roomStartPosX;
 	private Dictionary<string,Queue<GameObject>> roomObjectPools;
 
@@ -71,46 +73,77 @@ public class roomManager : MonoBehaviour {
 			poolSizeIndex++;
 		}
 
-		//Create temporary hard-coded room nodes
-		roomNode room1 = new roomNode();
-		roomNode room2 = new roomNode();
-		roomNode room3 = new roomNode();
+		//generate room nodes
+		int numRooms = Random.Range (4, 9);
+		roomNode[] roomNodes = new roomNode[numRooms];
+		for (int i=0; i<numRooms; i++) {
+			//temperary roomTile assignment
+			roomNodes[i]=new roomNode();
+			switch (i) {
+			case 0: roomNodes[i].roomTile="pinkRoom";
+				break;
+			case 1: roomNodes[i].roomTile="purpleRoom";
+				break;
+			case 2: roomNodes[i].roomTile="greenRoom";
+				break;
+			case 3: roomNodes[i].roomTile="blueRoom";
+				break;
+			case 4: roomNodes[i].roomTile="redRoom";
+				break;
+			case 5: roomNodes[i].roomTile="blackRoom";
+				break;
+			case 6: roomNodes[i].roomTile="orangeRoom";
+				break;
+			case 7: roomNodes[i].roomTile="redRoom";
+				break;
+			}
+			roomNodes[i].roomSize=Random.Range (100, 400);
+			roomNodes[i].taken = false;
+		}
 
-		room1.roomTile = "pinkRoom";
-		room1.roomSize = 100;
-		Vector3 nextRoomTrig0Pos =  new Vector3 (room1.roomSize, Camera.main.orthographicSize/2, 0);
-		Vector3 nextRoomTrig1Pos =  new Vector3 (room1.roomSize, -Camera.main.orthographicSize/2, 0);
-		Vector3 midRoomTrigPos =  new Vector3 (room1.roomSize/2, 0, 0);
-		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
-		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
-		room1.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
-		room1.roomAdj.Add (room2);
-		room1.roomAdj.Add (room3);
+		currentNode=roomNodes[Random.Range (0, numRooms)];
+		endNode = roomNodes [Random.Range (0, numRooms)];
+		currentNode.taken = true;
+		roomNode tempNode = currentNode;
 
-		room2.roomTile = "purpleRoom";
-		room2.roomSize = 100;
-		nextRoomTrig0Pos =  new Vector3 (room2.roomSize, Camera.main.orthographicSize/2, 0);
-		nextRoomTrig1Pos =  new Vector3 (room2.roomSize, -Camera.main.orthographicSize/2, 0);
-		midRoomTrigPos =  new Vector3 (room2.roomSize/2, 0, 0);
-		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
-		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
-		room2.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(midRoomTrigPos, "midRoomTrigger"));
-		room2.roomAdj.Add (room3);
-		room2.roomAdj.Add (room1);
+		while (tempNode!=endNode) {
+			int tempNum=Random.Range (0, numRooms);
+			if (!roomNodes[tempNum].taken) {
+				tempNode.roomAdj.Add (roomNodes[tempNum]);
+				roomNodes[tempNum].roomAdj.Add (tempNode);
+				roomNodes[tempNum].taken=true;
+				tempNode=roomNodes[tempNum];
+			}
+		}
 
-		room3.roomTile = "greenRoom";
-		room3.roomSize = 100;
-		nextRoomTrig0Pos =  new Vector3 (room3.roomSize, Camera.main.orthographicSize/2, 0);
-		nextRoomTrig1Pos =  new Vector3 (room3.roomSize, -Camera.main.orthographicSize/2, 0);
-		midRoomTrigPos =  new Vector3 (room3.roomSize/2, 0, 0);
-		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig0Pos, "nextRoomTriggerHalf"));
-		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string>(nextRoomTrig1Pos, "nextRoomTriggerHalf"));
-		room3.roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
-		room3.roomAdj.Add (room1);
-		room3.roomAdj.Add (room2);
+		//connect more nodes
+		//for (int i=0; i<
+
+		//add nextRoomTriggers
+		for (int i=0; i<numRooms; i++) {
+			Vector3 midRoomTrigPos = new Vector3 (roomNodes [i].roomSize / 2, 0, 0);
+			roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
+			if (roomNodes[i].roomAdj.Count==1) {
+				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, 0, 0);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "nextRoomTriggerWhole"));
+			}
+			else if (roomNodes[i].roomAdj.Count==2) {
+				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize / 2, 0);
+				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize / 2, 0);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "nextRoomTriggerHalf"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "nextRoomTriggerHalf"));
+			}
+			else if (roomNodes[i].roomAdj.Count==3) {
+				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize / 3, 0);
+				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize / 3, 0);
+				Vector3 nextRoomTrig2Pos = new Vector3 (roomNodes [i].roomSize, 0, 0);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "nextRoomTriggerThird"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "nextRoomTriggerThird"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig2Pos, "nextRoomTriggerThird"));
+			}
+		}
 
 		//Initialize variables to start rendering/instantiating rooms
-		currentNode = room1;
 		roomStartPosX = 0; //Will make first room slightly too large
 		//Initialize previous node to an empty node
 		prevNode = new roomNode();
