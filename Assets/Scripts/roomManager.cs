@@ -72,7 +72,7 @@ public class roomManager : MonoBehaviour {
 			}
 			poolSizeIndex++;
 		}
-
+		
 		//generate room nodes
 		int numRooms = Random.Range (4, 9);
 		roomNode[] roomNodes = new roomNode[numRooms];
@@ -222,5 +222,7 @@ public class roomManager : MonoBehaviour {
 			//Put the object back into the queue to be reused
 			roomObjectPools[roomObject.name].Enqueue(roomObject);
 		}
+		//Clear out the placed room objecs list
+		prevNode.placedRoomObjects.Clear ();
 	}
 }
