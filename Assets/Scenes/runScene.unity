@@ -108,6 +108,8 @@ MonoBehaviour:
   - {fileID: 125802, guid: 236ae515e002d4a5e93452f0afd28f22, type: 2}
   - {fileID: 139314, guid: bac2255ff4b2b440fb6ddac8f22818b4, type: 2}
   poolSize: 0200000004000000060000000200000002000000
+  maxRoomSize: 150
+  minRoomSize: 100
 --- !u!4 &409843371
 Transform:
   m_ObjectHideFlags: 0

@@ -39,6 +39,8 @@ public class roomManager : MonoBehaviour {
 
 	public GameObject[] roomObjectPrefabs;
 	public int[] poolSize;
+	public int maxRoomSize;
+	public int minRoomSize;
 
 	/*~~~~~~ private variables ~~~~~~*/
 
@@ -208,7 +210,7 @@ public class roomManager : MonoBehaviour {
 				break;
 			}
 			// Assign each room a size between 100 and 400
-			roomNodes[i].roomSize=Random.Range (100, 400);
+			roomNodes[i].roomSize=Random.Range (minRoomSize, maxRoomSize);
 		}
 
 		return roomNodes;
@@ -264,18 +266,19 @@ public class roomManager : MonoBehaviour {
 		for (index = 0; index < numRooms; index++) {
 			//Get number of new rooms to connect to
 			int numConnectedRoom = roomNodes[index].roomAdj.Count; //Will be 1 or 2
-			int maxNewConnections = 3 - numConnectedRoom ;
+			int maxNewConnections = 4 - numConnectedRoom ;
 			int numNewAdjRooms = Random.Range(0, maxNewConnections);
 			
 			//Connect to at most the number of new adjacent rooms
 			for(int i=0; i<numNewAdjRooms; i++) {
-				//Get the index of a room that's not the room being indexed
-				int nextRoomIndex = Random.Range(0,numRooms-2);
-				if (nextRoomIndex == index)
-					nextRoomIndex++;
-				//Add the room to the current room adjacentcy list (if not already present)
-				if(!roomNodes[index].roomAdj.Contains(roomNodes[nextRoomIndex]))
-					roomNodes[index].roomAdj.Add(roomNodes[nextRoomIndex]);
+				//Get the index of a random room
+				int nextRoomIndex = Random.Range(0,numRooms-1);
+				//If the index is for the current room or for a room already in the roomAdj array
+				if (nextRoomIndex == index || roomNodes[index].roomAdj.Contains(roomNodes[nextRoomIndex]))
+					//Try the next room
+					nextRoomIndex = (nextRoomIndex + 1) % numRooms;
+				//Add the room to the current room adjacentcy list
+				roomNodes[index].roomAdj.Add(roomNodes[nextRoomIndex]);
 			}
 		}
 	}
@@ -300,8 +303,8 @@ public class roomManager : MonoBehaviour {
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "pipeHalf"));
 			}
 			else if (roomNodes[i].roomAdj.Count==3) {
-				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize / 3, 0);
-				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize / 3, 0);
+				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize * 2 / 3, 0);
+				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize * 2 / 3, 0);
 				Vector3 nextRoomTrig2Pos = new Vector3 (roomNodes [i].roomSize, 0, 0);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "pipeThird"));
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "pipeThird"));
