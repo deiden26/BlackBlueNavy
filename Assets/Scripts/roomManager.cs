@@ -121,9 +121,10 @@ public class roomManager : MonoBehaviour {
 			//Move room object to its new position
 			roomObject.transform.position = roomObjectPos;
 			//If the room object is a nextRoomTrigger
-			if(roomObject.name.Contains("nextRoomTrigger")) {
+			if(roomObject.name.Contains("pipe")) {
 				//Create a new tag with the next room index (store which room this trigger takes you too)
-				roomObject.tag = "nextRoomTrigger" + roomTriggerIndex;
+				GameObject pipeStart = roomObject.transform.Find("pipeStart").gameObject;;
+				pipeStart.tag = "nextRoomTrigger" + roomTriggerIndex;
 				//Increment next room index in case there is another next room trigger
 				roomTriggerIndex++;
 			}
@@ -281,27 +282,30 @@ public class roomManager : MonoBehaviour {
 
 	private void addNextRoomTriggers(roomNode[] roomNodes) {
 		int numRooms = roomNodes.Length;
-		//add nextRoomTriggers
 		for (int i=0; i<numRooms; i++) {
 			Vector3 midRoomTrigPos = new Vector3 (roomNodes [i].roomSize / 2, 0, 0);
 			roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
+			//Add wall
+			Vector3 wallPos = new Vector3 (roomNodes [i].roomSize, 0, 0);
+			roomNodes [i].roomObjectsInfo.Add ( new KeyValuePair<Vector3, string> (wallPos, "wall"));
+			//add pipes
 			if (roomNodes[i].roomAdj.Count==1) {
 				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, 0, 0);
-				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "nextRoomTriggerWhole"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "pipeWhole"));
 			}
 			else if (roomNodes[i].roomAdj.Count==2) {
 				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize / 2, 0);
 				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize / 2, 0);
-				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "nextRoomTriggerHalf"));
-				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "nextRoomTriggerHalf"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "pipeHalf"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "pipeHalf"));
 			}
 			else if (roomNodes[i].roomAdj.Count==3) {
 				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize / 3, 0);
 				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize / 3, 0);
 				Vector3 nextRoomTrig2Pos = new Vector3 (roomNodes [i].roomSize, 0, 0);
-				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "nextRoomTriggerThird"));
-				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "nextRoomTriggerThird"));
-				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig2Pos, "nextRoomTriggerThird"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "pipeThird"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "pipeThird"));
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig2Pos, "pipeThird"));
 			}
 		}
 	}
