@@ -171,7 +171,9 @@ public class roomManager : MonoBehaviour {
 
 		//Choose a start node and an end node
 		int currentNodeIndex = Random.Range (0, roomNodes.Length);
-		int endNodeIndex = Random.Range (0, roomNodes.Length);
+		int endNodeIndex = Random.Range (0, roomNodes.Length-1);
+		if (endNodeIndex == currentNodeIndex)
+			endNodeIndex++;
 
 		//Link the room nodes together in a directed graph thats completely traversable from any node
 		linkRoomNodes (currentNodeIndex, roomNodes);
@@ -183,7 +185,7 @@ public class roomManager : MonoBehaviour {
 	}
 
 	private roomNode[] generateRoomNodes () {
-		//Create 4 to 9 room nodes
+		//Create 4 to 8 room nodes
 		int numRooms = Random.Range (4, 9);
 		roomNode[] roomNodes = new roomNode[numRooms];
 		//Create temporary taken array
@@ -206,10 +208,10 @@ public class roomManager : MonoBehaviour {
 				break;
 			case 6: roomNodes[i].roomTile="orangeRoom";
 				break;
-			case 7: roomNodes[i].roomTile="redRoom";
+			case 7: roomNodes[i].roomTile="yellowRoom";
 				break;
 			}
-			// Assign each room a size between 100 and 400
+			// Assign each room a size
 			roomNodes[i].roomSize=Random.Range (minRoomSize, maxRoomSize);
 		}
 
@@ -228,7 +230,7 @@ public class roomManager : MonoBehaviour {
 			visited[index] = true;
 			numVisited++;
 			//Pick a random room
-			int nextRoomIndex = Random.Range(0,numRooms-1);
+			int nextRoomIndex = Random.Range(0,numRooms);
 			//If the room has already been visited
 			while(visited[nextRoomIndex])
 				//Try the next room
@@ -248,7 +250,7 @@ public class roomManager : MonoBehaviour {
 			//Mark current room as visited
 			visited[index] = true;
 			//Pick a random room
-			int nextRoomIndex = Random.Range(0,numRooms-1);
+			int nextRoomIndex = Random.Range(0,numRooms);
 			//If the room has already been visited
 			while(visited[nextRoomIndex])
 				//Try the next room
@@ -272,7 +274,7 @@ public class roomManager : MonoBehaviour {
 			//Connect to at most the number of new adjacent rooms
 			for(int i=0; i<numNewAdjRooms; i++) {
 				//Get the index of a random room
-				int nextRoomIndex = Random.Range(0,numRooms-1);
+				int nextRoomIndex = Random.Range(0,numRooms);
 				//If the index is for the current room or for a room already in the roomAdj array
 				if (nextRoomIndex == index || roomNodes[index].roomAdj.Contains(roomNodes[nextRoomIndex]))
 					//Try the next room
