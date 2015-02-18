@@ -46,6 +46,7 @@ public class roomManager : MonoBehaviour {
 
 	private roomNode currentNode;
 	private roomNode prevNode;
+	private roomNode levelEnd;
 	private float roomStartPosX;
 	private Dictionary<string,Queue<GameObject>> roomObjectPools;
 
@@ -53,6 +54,11 @@ public class roomManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//Initialize levelEnd Node
+		levelEnd = new roomNode ();
+		levelEnd.roomTile = "pinkRoom";
+		levelEnd.roomSize = 100;
+
 		//Create pools of room objects
 		createRoomObjectPools ();
 		
@@ -90,8 +96,13 @@ public class roomManager : MonoBehaviour {
 	/*~~~~~~ public functions ~~~~~~*/
 
 	public void enterRoom(int nextRoomIndex, float newRoomPosX) {
-		Debug.Log ("Entered next room");
+				Debug.Log ("Entered next room");
 
+		//See if end of level
+		if (currentNode.roomAdj [nextRoomIndex] == levelEnd) {
+			Debug.Log ("end of level");
+			Application.LoadLevel ("startScene");
+		}
 		//Set current node to previous node
 		prevNode = currentNode;
 		//Set current node to next node
@@ -174,6 +185,10 @@ public class roomManager : MonoBehaviour {
 		int endNodeIndex = Random.Range (0, roomNodes.Length-1);
 		if (endNodeIndex == currentNodeIndex)
 			endNodeIndex++;
+
+		Debug.Log (endNodeIndex);
+
+		roomNodes [endNodeIndex].roomAdj.Add (levelEnd);
 
 		//Link the room nodes together in a directed graph thats completely traversable from any node
 		linkRoomNodes (currentNodeIndex, roomNodes);
