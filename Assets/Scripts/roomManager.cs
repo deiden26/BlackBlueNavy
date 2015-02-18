@@ -100,7 +100,6 @@ public class roomManager : MonoBehaviour {
 
 		//See if end of level
 		if (currentNode.roomAdj [nextRoomIndex] == levelEnd) {
-			Debug.Log ("end of level");
 			Application.LoadLevel ("startScene");
 		}
 		//Set current node to previous node
@@ -186,7 +185,7 @@ public class roomManager : MonoBehaviour {
 		if (endNodeIndex == currentNodeIndex)
 			endNodeIndex++;
 
-		Debug.Log (endNodeIndex);
+		Debug.Log ("End pipe is bottom one in " + roomNodes[endNodeIndex].roomTile);
 
 		roomNodes [endNodeIndex].roomAdj.Add (levelEnd);
 
