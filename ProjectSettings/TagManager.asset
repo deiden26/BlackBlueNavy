@@ -11,6 +11,8 @@ TagManager:
   - nextRoomTrigger1
   - nextRoomTrigger2
   - 
+  - startButton
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -63,4 +65,8 @@ TagManager:
   - name: Pipe
     userID: 3
     uniqueID: 4156233807
+    locked: 0
+  - name: Button
+    userID: 5
+    uniqueID: 2309385475
     locked: 0
