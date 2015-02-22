@@ -95,9 +95,11 @@ public class roomManager : MonoBehaviour {
 
 	/*~~~~~~ public functions ~~~~~~*/
 
-	public void enterRoom(int nextRoomIndex, float newRoomPosX) {
-				Debug.Log ("Entered next room");
 
+
+	/*~~~~~~ private functions ~~~~~~*/
+
+	private void enterRoom(int nextRoomIndex, float newRoomPosX) {
 		//See if end of level
 		if (currentNode.roomAdj [nextRoomIndex] == levelEnd) {
 			Application.LoadLevel ("startScene");
@@ -113,14 +115,11 @@ public class roomManager : MonoBehaviour {
 		//Alert subscribers that you have changed the room
 		onRoomChange(currentNode.roomTile);
 	}
-
+	
 	public void endRoom() {
-		Debug.Log ("Hit mid room");
 		//Destroy all of the instantiated objects from the old room
 		removeOldRoomObjects();
 	}
-
-	/*~~~~~~ private functions ~~~~~~*/
 
 	private void placeNewRoomObjects(){
 		int roomTriggerIndex = 0;
