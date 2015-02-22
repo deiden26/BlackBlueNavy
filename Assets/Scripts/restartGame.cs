@@ -13,9 +13,9 @@ public class restartGame : MonoBehaviour {
 	}
 	
 	void Update () {
-		nextPosition.x = penguinTransform.position.x-2;
-		nextPosition.y = 4.1f;
-		transform.position = nextPosition;
+//		nextPosition.x = penguinTransform.position.x-2;
+//		nextPosition.y = 4.1f;
+//		transform.position = nextPosition;
 	}
 	
 	void LoadLevel() {

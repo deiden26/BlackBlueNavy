@@ -19,11 +19,13 @@ public class PenguinController : MonoBehaviour {
 	/*~~~~~~ private variables ~~~~~~*/
 
 	private bool grounded;
+	private int health;
 
 	/*~~~~~~ unity functions ~~~~~~*/
 	
 	void Start () {
 		rigidbody2D.velocity = new Vector3 (1, 0, 0) * forwardVelocity;
+		health = 10;
 	}
 
 	void FixedUpdate () {
