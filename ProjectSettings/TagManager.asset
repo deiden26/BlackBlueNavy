@@ -6,12 +6,14 @@ TagManager:
   - floor
   - room
   - Penguin
-  - midRoomTrigger
+  - endRoomTrigger
   - nextRoomTrigger0
   - nextRoomTrigger1
   - nextRoomTrigger2
   - 
   - startButton
+  - 
+  - midRoomTrigger
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

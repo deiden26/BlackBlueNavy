@@ -105,9 +105,8 @@ MonoBehaviour:
   - {fileID: 103446, guid: 0aa8fefb7954a4983a7a000d683dcf31, type: 2}
   - {fileID: 149070, guid: fb553dd09670d4ba58644f0c5d46953e, type: 2}
   - {fileID: 106042, guid: 3a82ca7e6d83844d9a9d2621ad465582, type: 2}
-  - {fileID: 125802, guid: 236ae515e002d4a5e93452f0afd28f22, type: 2}
   - {fileID: 139314, guid: bac2255ff4b2b440fb6ddac8f22818b4, type: 2}
-  poolSize: 0200000004000000060000000200000002000000
+  poolSize: 02000000040000000600000002000000
   maxRoomSize: 150
   minRoomSize: 100
 --- !u!4 &409843371

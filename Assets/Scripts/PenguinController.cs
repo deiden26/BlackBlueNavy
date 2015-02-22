@@ -8,8 +8,8 @@ public class PenguinController : MonoBehaviour {
 	public delegate void enterRoomAction(int nextRoomIndex, float newRoomPosX);
 	public static event enterRoomAction onEnterRoom;
 
-	public delegate void midRoomAction();
-	public static event midRoomAction onMidRoom;
+	public delegate void endRoomAction();
+	public static event endRoomAction onEndRoom;
 
 	/*~~~~~~ public variables~~~~~~*/
 
@@ -58,8 +58,8 @@ public class PenguinController : MonoBehaviour {
 			//Enter the next room node at the parsed index
 			onEnterRoom(nextRoomIndexInt, other.transform.position.x);
 		}
-		else if(other.tag.Contains("midRoomTrigger")) {
-			onMidRoom();
+		else if(other.tag.Contains("endRoomTrigger")) {
+			onEndRoom();
 		}
 	}
 	

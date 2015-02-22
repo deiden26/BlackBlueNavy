@@ -83,14 +83,14 @@ public class roomManager : MonoBehaviour {
 	void OnEnable()
 	{
 		PenguinController.onEnterRoom += enterRoom;
-		PenguinController.onMidRoom += midRoom;
+		PenguinController.onEndRoom += endRoom;
 	}
 	
 	
 	void OnDisable()
 	{
 		PenguinController.onEnterRoom -= enterRoom;
-		PenguinController.onMidRoom -= midRoom;
+		PenguinController.onEndRoom -= endRoom;
 	}
 
 	/*~~~~~~ public functions ~~~~~~*/
@@ -114,7 +114,7 @@ public class roomManager : MonoBehaviour {
 		onRoomChange(currentNode.roomTile);
 	}
 
-	public void midRoom() {
+	public void endRoom() {
 		Debug.Log ("Hit mid room");
 		//Destroy all of the instantiated objects from the old room
 		removeOldRoomObjects();
@@ -302,8 +302,6 @@ public class roomManager : MonoBehaviour {
 	private void addNextRoomTriggers(roomNode[] roomNodes) {
 		int numRooms = roomNodes.Length;
 		for (int i=0; i<numRooms; i++) {
-			Vector3 midRoomTrigPos = new Vector3 (roomNodes [i].roomSize / 2, 0, 0);
-			roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (midRoomTrigPos, "midRoomTrigger"));
 			//Add wall
 			Vector3 wallPos = new Vector3 (roomNodes [i].roomSize, 0, 0);
 			roomNodes [i].roomObjectsInfo.Add ( new KeyValuePair<Vector3, string> (wallPos, "wall"));
