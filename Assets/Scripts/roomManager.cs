@@ -95,7 +95,7 @@ public class roomManager : MonoBehaviour {
 
 	/*~~~~~~ public functions ~~~~~~*/
 
-	public void enterRoom(int nextRoomIndex, float newRoomPosX) {
+	public void enterRoom(int nextRoomIndex, float pipeStartPosition) {
 				Debug.Log ("Entered next room");
 
 		//See if end of level
@@ -107,7 +107,8 @@ public class roomManager : MonoBehaviour {
 		//Set current node to next node
 		currentNode = currentNode.roomAdj [nextRoomIndex];
 		//Update roomStartPos
-		roomStartPosX = newRoomPosX;
+		float pipeLength = roomObjectPools["pipeWhole"].Peek().renderer.bounds.size.x;
+		roomStartPosX = pipeStartPosition + pipeLength;
 		//Instantiate objects for new room
 		placeNewRoomObjects ();
 		//Alert subscribers that you have changed the room
@@ -195,9 +196,23 @@ public class roomManager : MonoBehaviour {
 		//Add triggers to get from one room to the next
 		addNextRoomTriggers (roomNodes);
 
+		//add objects to rooms
+		addObjects (roomNodes);
+
 		return roomNodes [currentNodeIndex];
 	}
 
+	private void addObjects(roomNode[] roomNodes) {
+		for (int i=0; i<roomNodes.Length; i++) {
+			int numPlatforms = 5;
+			int xposition=10;
+			for (int j=0; j<numPlatforms; j++) {
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,0,0), "spikes"));
+				xposition += 10;
+			}
+		}
+	}
+	
 	private roomNode[] generateRoomNodes () {
 		//Create 4 to 8 room nodes
 		int numRooms = Random.Range (4, 9);
