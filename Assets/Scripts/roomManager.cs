@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 
@@ -48,6 +48,7 @@ public class roomManager : MonoBehaviour {
 	private roomNode prevNode;
 	private roomNode levelEnd;
 	private float roomStartPosX;
+	private float floorPosition;
 	private Dictionary<string,Queue<GameObject>> roomObjectPools;
 
 	/*~~~~~~ unity functions ~~~~~~*/
@@ -64,6 +65,11 @@ public class roomManager : MonoBehaviour {
 		
 		//generate room nodes that make up the level
 		currentNode = createRooms ();
+
+		//get floor position
+		GameObject camera = GameObject.Find ("camera");
+		GameObject floor = camera.transform.Find("floor").gameObject;
+		floorPosition = floor.transform.position.y;
 
 		//Initialize variables to start rendering/instantiating rooms
 		roomStartPosX = 0; //Will make first room slightly too large
@@ -99,7 +105,7 @@ public class roomManager : MonoBehaviour {
 
 	/*~~~~~~ private functions ~~~~~~*/
 
-	private void enterRoom(int nextRoomIndex, float newRoomPosX) {
+	private void enterRoom(int nextRoomIndex, float pipeStartPosition) {
 		//See if end of level
 		if (currentNode.roomAdj [nextRoomIndex] == levelEnd) {
 			Application.LoadLevel ("startScene");
@@ -109,7 +115,8 @@ public class roomManager : MonoBehaviour {
 		//Set current node to next node
 		currentNode = currentNode.roomAdj [nextRoomIndex];
 		//Update roomStartPos
-		roomStartPosX = newRoomPosX;
+		float pipeLength = roomObjectPools["pipeWhole"].Peek().renderer.bounds.size.x;
+		roomStartPosX = pipeStartPosition + pipeLength;
 		//Instantiate objects for new room
 		placeNewRoomObjects ();
 		//Alert subscribers that you have changed the room
@@ -134,7 +141,7 @@ public class roomManager : MonoBehaviour {
 			//If the room object is a nextRoomTrigger
 			if(roomObject.name.Contains("pipe")) {
 				//Create a new tag with the next room index (store which room this trigger takes you too)
-				GameObject pipeStart = roomObject.transform.Find("pipeStart").gameObject;;
+				GameObject pipeStart = roomObject.transform.Find("pipeStart").gameObject;
 				pipeStart.tag = "nextRoomTrigger" + roomTriggerIndex;
 				//Increment next room index in case there is another next room trigger
 				roomTriggerIndex++;
@@ -194,9 +201,26 @@ public class roomManager : MonoBehaviour {
 		//Add triggers to get from one room to the next
 		addNextRoomTriggers (roomNodes);
 
+		//add objects to rooms
+		addObjects (roomNodes);
+
 		return roomNodes [currentNodeIndex];
 	}
 
+	private void addObjects(roomNode[] roomNodes) {
+		for (int i=0; i<roomNodes.Length; i++) {
+			int numSpikes = (int) roomNodes[i].roomSize/20;
+			numSpikes = (int) Random.Range ((int)numSpikes/2f, (int)numSpikes*1.5f);
+			float minPosition=10;
+			float maxPosition=roomNodes[i].roomSize-10;
+			for (int j=0; j<numSpikes; j++) {
+				float xposition=Random.Range (minPosition, maxPosition);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,-4.5f,0), "spikes"));
+				xposition += 10;
+			}
+		}
+	}
+	
 	private roomNode[] generateRoomNodes () {
 		//Create 4 to 8 room nodes
 		int numRooms = Random.Range (4, 9);
