@@ -44,13 +44,13 @@ public class PenguinController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if(other.gameObject.CompareTag("floor")) {
+		if(other.gameObject.CompareTag("floor") || other.gameObject.CompareTag("platform")) {
 		   grounded = true;
 		}
 	}
 
 	void OnCollisionExit2D(Collision2D other) {
-		if(other.gameObject.CompareTag("floor")) {
+		if(other.gameObject.CompareTag("floor") || other.gameObject.CompareTag("platform")) {
 			grounded = false;
 		}
 	}

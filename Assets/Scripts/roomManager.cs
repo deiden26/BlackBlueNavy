@@ -224,9 +224,10 @@ public class roomManager : MonoBehaviour {
 			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
 			minPosition=10;
 			maxPosition=roomNodes[i].roomSize-10;
-			for (int j=0; j<numObjects; j++) {
+			roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(maxPosition+5,-1f,0), "platform"));
+			for (int j=0; j<(numObjects-1); j++) {
 				float xposition=Random.Range (minPosition, maxPosition);
-				float yposition=Random.Range (-3.5f, 3.5f);
+				float yposition=Random.Range (-3.5f, 0f);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,yposition,0), "platform"));
 			}
 		}
