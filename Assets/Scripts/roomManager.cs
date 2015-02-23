@@ -208,15 +208,26 @@ public class roomManager : MonoBehaviour {
 	}
 
 	private void addObjects(roomNode[] roomNodes) {
+		//For each room
 		for (int i=0; i<roomNodes.Length; i++) {
-			int numSpikes = (int) roomNodes[i].roomSize/20;
-			numSpikes = (int) Random.Range ((int)numSpikes/2f, (int)numSpikes*1.5f);
+			//Add a random number of spikes that is related to room size
+			int numObjects = (int) roomNodes[i].roomSize/20;
+			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
 			float minPosition=10;
 			float maxPosition=roomNodes[i].roomSize-10;
-			for (int j=0; j<numSpikes; j++) {
+			for (int j=0; j<numObjects; j++) {
 				float xposition=Random.Range (minPosition, maxPosition);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,-4.5f,0), "spikes"));
-				xposition += 10;
+			}
+			//Add a random number of platforms that is related to room size
+			numObjects = (int) roomNodes[i].roomSize/20;
+			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
+			minPosition=10;
+			maxPosition=roomNodes[i].roomSize-10;
+			for (int j=0; j<numObjects; j++) {
+				float xposition=Random.Range (minPosition, maxPosition);
+				float yposition=Random.Range (-3.5f, 3.5f);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,yposition,0), "platform"));
 			}
 		}
 	}
@@ -324,25 +335,27 @@ public class roomManager : MonoBehaviour {
 
 	private void addNextRoomTriggers(roomNode[] roomNodes) {
 		int numRooms = roomNodes.Length;
+		float pipeLength = roomObjectPools["pipeWhole"].Peek().renderer.bounds.size.x;
 		for (int i=0; i<numRooms; i++) {
+			float posX = roomNodes [i].roomSize + pipeLength/2f;
 			//Add wall
-			Vector3 wallPos = new Vector3 (roomNodes [i].roomSize, 0, 0);
+			Vector3 wallPos = new Vector3 (posX, 0, 0);
 			roomNodes [i].roomObjectsInfo.Add ( new KeyValuePair<Vector3, string> (wallPos, "wall"));
 			//add pipes
 			if (roomNodes[i].roomAdj.Count==1) {
-				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, 0, 0);
+				Vector3 nextRoomTrig0Pos = new Vector3 (posX, 0, 0);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "pipeWhole"));
 			}
 			else if (roomNodes[i].roomAdj.Count==2) {
-				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize / 2, 0);
-				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize / 2, 0);
+				Vector3 nextRoomTrig0Pos = new Vector3 (posX, -Camera.main.orthographicSize / 2, 0);
+				Vector3 nextRoomTrig1Pos = new Vector3 (posX, Camera.main.orthographicSize / 2, 0);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "pipeHalf"));
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "pipeHalf"));
 			}
 			else if (roomNodes[i].roomAdj.Count==3) {
-				Vector3 nextRoomTrig0Pos = new Vector3 (roomNodes [i].roomSize, -Camera.main.orthographicSize * 2 / 3, 0);
-				Vector3 nextRoomTrig1Pos = new Vector3 (roomNodes [i].roomSize, Camera.main.orthographicSize * 2 / 3, 0);
-				Vector3 nextRoomTrig2Pos = new Vector3 (roomNodes [i].roomSize, 0, 0);
+				Vector3 nextRoomTrig0Pos = new Vector3 (posX, -Camera.main.orthographicSize * 2 / 3, 0);
+				Vector3 nextRoomTrig1Pos = new Vector3 (posX, Camera.main.orthographicSize * 2 / 3, 0);
+				Vector3 nextRoomTrig2Pos = new Vector3 (posX, 0, 0);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig0Pos, "pipeThird"));
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig1Pos, "pipeThird"));
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (nextRoomTrig2Pos, "pipeThird"));
