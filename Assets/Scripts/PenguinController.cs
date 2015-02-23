@@ -11,7 +11,7 @@ public class PenguinController : MonoBehaviour {
 	public delegate void endRoomAction();
 	public static event endRoomAction onEndRoom;
 
-	public delegate void healthChangeAction(float health);
+	public delegate void healthChangeAction(float health, bool nextLevel);
 	public static event healthChangeAction onHealthChange;
 
 	/*~~~~~~ public variables~~~~~~*/
@@ -28,7 +28,7 @@ public class PenguinController : MonoBehaviour {
 	
 	void Start () {
 		rigidbody2D.velocity = new Vector3 (1, 0, 0) * forwardVelocity;
-		onHealthChange(health);
+		onHealthChange(health, true);
 	}
 
 	void FixedUpdate () {
@@ -75,7 +75,7 @@ public class PenguinController : MonoBehaviour {
 			float healthPass=health;
 			if (health<=0)
 				healthUpdate ();
-			onHealthChange(healthPass);
+			onHealthChange(healthPass, false);
 		}
 	}
 	

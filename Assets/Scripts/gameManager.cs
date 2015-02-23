@@ -33,7 +33,7 @@ public class gameManager : MonoBehaviour {
 
 	/*~~~~~~ private functions ~~~~~~*/
 
-	private void checkForDeath(float newHealth) {
+	private void checkForDeath(float newHealth, bool nextLevel) {
 		if (newHealth <= 0) {
 			loseScene ();
 		}
