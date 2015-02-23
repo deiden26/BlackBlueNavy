@@ -11,6 +11,9 @@ public class PenguinController : MonoBehaviour {
 	public delegate void endRoomAction();
 	public static event endRoomAction onEndRoom;
 
+	public delegate void healthChangeAction(float health);
+	public static event healthChangeAction onHealthChange;
+
 	/*~~~~~~ public variables~~~~~~*/
 
 	public float forwardVelocity;
@@ -19,13 +22,14 @@ public class PenguinController : MonoBehaviour {
 	/*~~~~~~ private variables ~~~~~~*/
 
 	private bool grounded;
-	private int health;
+	private float health;
 
 	/*~~~~~~ unity functions ~~~~~~*/
 	
 	void Start () {
 		rigidbody2D.velocity = new Vector3 (1, 0, 0) * forwardVelocity;
-		health = 10;
+		health = 100;
+		onHealthChange(health);
 	}
 
 	void FixedUpdate () {
@@ -62,6 +66,10 @@ public class PenguinController : MonoBehaviour {
 		}
 		else if(other.tag.Contains("endRoomTrigger")) {
 			onEndRoom();
+		}
+		else if(other.tag == "spikes") {
+			health = health - 10;
+			onHealthChange(health);
 		}
 	}
 	

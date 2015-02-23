@@ -34,7 +34,7 @@ public class roomManager : MonoBehaviour {
 
 	public delegate void roomChangeAction(string roomTile);
 	public static event roomChangeAction onRoomChange;
-
+	
 	/*~~~~~~ public variables ~~~~~~*/
 
 	public GameObject[] roomObjectPrefabs;
