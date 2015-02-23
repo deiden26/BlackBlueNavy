@@ -210,6 +210,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1157439813}
+        m_MethodName: healthUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1961627216}
         m_MethodName: startScene
         m_Mode: 1
@@ -262,7 +274,7 @@ GameObject:
   - 114: {fileID: 365875553}
   m_Layer: 5
   m_Name: healthBar
-  m_TagString: Untagged
+  m_TagString: health
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -816,7 +828,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1157439808}
-  m_Mass: 5
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
@@ -836,8 +848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2127714a1db64cd5b30064ab408a38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardVelocity: 10
-  jumpForce: {x: 0, y: 30, z: 0}
+  forwardVelocity: 8
+  jumpForce: {x: 0, y: 100, z: 0}
 --- !u!95 &1157439814
 Animator:
   serializedVersion: 3

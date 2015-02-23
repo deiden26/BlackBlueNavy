@@ -12,8 +12,9 @@ TagManager:
   - nextRoomTrigger2
   - spikes
   - startButton
-  - 
+  - platform
   - midRoomTrigger
+  - health
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

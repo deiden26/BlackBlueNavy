@@ -22,13 +22,12 @@ public class PenguinController : MonoBehaviour {
 	/*~~~~~~ private variables ~~~~~~*/
 
 	private bool grounded;
-	private float health;
+	private static float health=100;
 
 	/*~~~~~~ unity functions ~~~~~~*/
 	
 	void Start () {
 		rigidbody2D.velocity = new Vector3 (1, 0, 0) * forwardVelocity;
-		health = 100;
 		onHealthChange(health);
 	}
 
@@ -41,6 +40,10 @@ public class PenguinController : MonoBehaviour {
 
 	void Update () {
 		transform.localRotation = new Quaternion (0, 0, 0, 0);
+	}
+
+	public void healthUpdate() {
+		health = 100;
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
@@ -69,7 +72,10 @@ public class PenguinController : MonoBehaviour {
 		}
 		else if(other.tag == "spikes") {
 			health = health - 10;
-			onHealthChange(health);
+			float healthPass=health;
+			if (health<=0)
+				healthUpdate ();
+			onHealthChange(healthPass);
 		}
 	}
 	

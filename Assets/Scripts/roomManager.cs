@@ -48,7 +48,6 @@ public class roomManager : MonoBehaviour {
 	private roomNode prevNode;
 	private roomNode levelEnd;
 	private float roomStartPosX;
-	private float floorPosition;
 	private Dictionary<string,Queue<GameObject>> roomObjectPools;
 
 	/*~~~~~~ unity functions ~~~~~~*/
@@ -69,7 +68,6 @@ public class roomManager : MonoBehaviour {
 		//get floor position
 		GameObject camera = GameObject.Find ("camera");
 		GameObject floor = camera.transform.Find("floor").gameObject;
-		floorPosition = floor.transform.position.y;
 
 		//Initialize variables to start rendering/instantiating rooms
 		roomStartPosX = 0; //Will make first room slightly too large
@@ -108,7 +106,7 @@ public class roomManager : MonoBehaviour {
 	private void enterRoom(int nextRoomIndex, float pipeStartPosition) {
 		//See if end of level
 		if (currentNode.roomAdj [nextRoomIndex] == levelEnd) {
-			Application.LoadLevel ("startScene");
+			Application.LoadLevel ("endLevelScene");
 		}
 		//Set current node to previous node
 		prevNode = currentNode;

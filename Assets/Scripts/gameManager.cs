@@ -27,11 +27,15 @@ public class gameManager : MonoBehaviour {
 		Application.LoadLevel ("runScene");
 	}
 
+	public void loseScene() {
+		Application.LoadLevel ("loseScene");
+	}
+
 	/*~~~~~~ private functions ~~~~~~*/
 
 	private void checkForDeath(float newHealth) {
-		if (newHealth <= 0)
-			startScene();
+		if (newHealth <= 0) {
+			loseScene ();
+		}
 	}
-
 }
