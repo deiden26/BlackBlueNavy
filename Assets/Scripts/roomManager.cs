@@ -217,6 +217,16 @@ public class roomManager : MonoBehaviour {
 				float xposition=Random.Range (minPosition, maxPosition);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,-4.5f,0), "spikes"));
 			}
+			//Add a random number of spike balls that is related to room size
+			numObjects = (int) roomNodes[i].roomSize/20;
+			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
+			minPosition=10;
+			maxPosition=roomNodes[i].roomSize-10;
+			for (int j=0; j<numObjects; j++) {
+				float xposition=Random.Range (minPosition, maxPosition);
+				float yposition=Random.Range (-3.5f, 3.5f);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,yposition,0), "spikeBall"));
+			}
 			//Add a random number of platforms that is related to room size
 			numObjects = (int) roomNodes[i].roomSize/20;
 			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
@@ -227,6 +237,13 @@ public class roomManager : MonoBehaviour {
 				float xposition=Random.Range (minPosition, maxPosition);
 				float yposition=Random.Range (-3.5f, 0f);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,yposition,0), "platform"));
+			}
+			//Add health balls
+			int healthProb = Random.Range (0,2);
+			if (healthProb==1) {
+				float xposition=Random.Range (minPosition, maxPosition);
+				float yposition=Random.Range (-3.5f, 0f);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,yposition,0), "pinkBall"));
 			}
 		}
 	}

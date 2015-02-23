@@ -77,6 +77,13 @@ public class PenguinController : MonoBehaviour {
 				healthUpdate ();
 			onHealthChange(healthPass, false);
 		}
+		else if(other.tag == "pinkBall") {
+			health = health + 10;
+			if (health>100)
+				health=100;
+			float healthPass=health;
+			onHealthChange(healthPass, false);
+		}
 	}
 	
 }
