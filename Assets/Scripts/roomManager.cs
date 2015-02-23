@@ -48,6 +48,7 @@ public class roomManager : MonoBehaviour {
 	private roomNode prevNode;
 	private roomNode levelEnd;
 	private float roomStartPosX;
+	private float floorPosition;
 	private Dictionary<string,Queue<GameObject>> roomObjectPools;
 
 	/*~~~~~~ unity functions ~~~~~~*/
@@ -64,6 +65,11 @@ public class roomManager : MonoBehaviour {
 		
 		//generate room nodes that make up the level
 		currentNode = createRooms ();
+
+		//get floor position
+		GameObject camera = GameObject.Find ("camera");
+		GameObject floor = camera.transform.Find("floor").gameObject;
+		floorPosition = floor.transform.position.y;
 
 		//Initialize variables to start rendering/instantiating rooms
 		roomStartPosX = 0; //Will make first room slightly too large
@@ -136,7 +142,7 @@ public class roomManager : MonoBehaviour {
 			//If the room object is a nextRoomTrigger
 			if(roomObject.name.Contains("pipe")) {
 				//Create a new tag with the next room index (store which room this trigger takes you too)
-				GameObject pipeStart = roomObject.transform.Find("pipeStart").gameObject;;
+				GameObject pipeStart = roomObject.transform.Find("pipeStart").gameObject;
 				pipeStart.tag = "nextRoomTrigger" + roomTriggerIndex;
 				//Increment next room index in case there is another next room trigger
 				roomTriggerIndex++;
@@ -204,10 +210,13 @@ public class roomManager : MonoBehaviour {
 
 	private void addObjects(roomNode[] roomNodes) {
 		for (int i=0; i<roomNodes.Length; i++) {
-			int numPlatforms = 5;
-			int xposition=10;
-			for (int j=0; j<numPlatforms; j++) {
-				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,0,0), "spikes"));
+			int numSpikes = (int) roomNodes[i].roomSize/20;
+			numSpikes = (int) Random.Range ((int)numSpikes/2f, (int)numSpikes*1.5f);
+			float minPosition=10;
+			float maxPosition=roomNodes[i].roomSize-10;
+			for (int j=0; j<numSpikes; j++) {
+				float xposition=Random.Range (minPosition, maxPosition);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,-4.5f,0), "spikes"));
 				xposition += 10;
 			}
 		}
