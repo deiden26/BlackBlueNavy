@@ -22,6 +22,7 @@ public class PenguinController : MonoBehaviour {
 	/*~~~~~~ private variables ~~~~~~*/
 
 	private bool grounded;
+	private float savedForwardVelocity;
 	private static float health=100;
 
 	/*~~~~~~ unity functions ~~~~~~*/
@@ -66,9 +67,15 @@ public class PenguinController : MonoBehaviour {
 			int nextRoomIndexInt = int.Parse(nextRoomIndexString);
 			//Enter the next room node at the parsed index
 			onEnterRoom(nextRoomIndexInt, other.transform.position.x);
+			//Increase speed to travel through the pipe faster
+			savedForwardVelocity = forwardVelocity;
+			forwardVelocity = 25;
+
 		}
 		else if(other.tag.Contains("endRoomTrigger")) {
 			onEndRoom();
+			//Decrease speed to prep user for next room
+			forwardVelocity = savedForwardVelocity;
 		}
 		else if(other.tag == "spikes") {
 			health = health - 10;
