@@ -8,12 +8,14 @@ public class runSceneUIManager : MonoBehaviour {
 	float hurtOverlayAlpha;
 	Slider healthSlider;
 	Image hurtOverlay;
+	Text coinCointText;
 
 	/*~~~~~~ unity functions ~~~~~~*/
 
 	void Start() {
 		healthSlider = this.transform.Find ("healthBar").GetComponent<Slider> ();
 		hurtOverlay = this.transform.Find ("hurtOverlay").GetComponent<Image> ();
+		coinCointText = this.transform.Find ("scoreHolder").transform.Find("score").GetComponent<Text> ();
 		hurtOverlayAlpha = 0;
 	}
 
@@ -29,12 +31,14 @@ public class runSceneUIManager : MonoBehaviour {
 	void OnEnable()
 	{
 		PenguinController.onHealthChange += changeHealth;
+		PenguinController.onCoinCollect += changeCoins;
 	}
 	
 	
 	void OnDisable()
 	{
 		PenguinController.onHealthChange -= changeHealth;
+		PenguinController.onCoinCollect -= changeCoins;
 	}
 
 	/*~~~~~~ private functions ~~~~~~*/
@@ -43,6 +47,10 @@ public class runSceneUIManager : MonoBehaviour {
 		if ((newHealth < healthSlider.value) && !nextLevel)
 			hurtOverlayAlpha = 1;
 		healthSlider.value = newHealth;
+	}
+
+	void changeCoins(int coinCount) {
+		coinCointText.text = string.Concat ("Coins: ", coinCount);
 	}
 
 }

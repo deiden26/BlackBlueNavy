@@ -14,6 +14,9 @@ public class PenguinController : MonoBehaviour {
 	public delegate void healthChangeAction(float health, bool nextLevel);
 	public static event healthChangeAction onHealthChange;
 
+	public delegate void coinCollectAction(int coinCoint);
+	public static event coinCollectAction onCoinCollect;
+
 	/*~~~~~~ public variables~~~~~~*/
 
 	public float forwardVelocity;
@@ -23,7 +26,8 @@ public class PenguinController : MonoBehaviour {
 
 	private bool grounded;
 	private float savedForwardVelocity;
-	private static float health=100;
+	private float health = 100;
+	private int coins = 0;
 
 	/*~~~~~~ unity functions ~~~~~~*/
 	
@@ -90,6 +94,11 @@ public class PenguinController : MonoBehaviour {
 				health=100;
 			float healthPass=health;
 			onHealthChange(healthPass, false);
+		}
+		else if(other.tag == "coin") {
+			other.transform.position = new Vector3(-100,0,0);
+			coins++;
+			onCoinCollect(coins);
 		}
 	}
 	
