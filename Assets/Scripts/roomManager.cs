@@ -245,6 +245,16 @@ public class roomManager : MonoBehaviour {
 				float yposition=Random.Range (-3.5f, 0f);
 				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,yposition,0), "pinkBall"));
 			}
+			//Add a random number of coins that is related to room size
+			numObjects = (int) roomNodes[i].roomSize/5;
+			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
+			minPosition=10;
+			maxPosition=roomNodes[i].roomSize-10;
+			for (int j=0; j<(numObjects-1); j++) {
+				float xposition=Random.Range (minPosition, maxPosition);
+				float yposition=Random.Range (-3.5f, 3.5f);
+				roomNodes [i].roomObjectsInfo.Add (new KeyValuePair<Vector3, string> (new Vector3(xposition,yposition,0), "coin"));
+			}
 		}
 	}
 	
