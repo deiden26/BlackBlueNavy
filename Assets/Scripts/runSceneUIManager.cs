@@ -49,7 +49,7 @@ public class runSceneUIManager : MonoBehaviour {
 		healthSlider.value = newHealth;
 	}
 
-	void changeCoins(int coinCount) {
+	void changeCoins(int coinCount, string coinName) {
 		coinCointText.text = string.Concat ("Coins: ", coinCount);
 	}
 

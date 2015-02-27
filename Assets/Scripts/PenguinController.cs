@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class PenguinController : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class PenguinController : MonoBehaviour {
 	public delegate void healthChangeAction(float health, bool nextLevel);
 	public static event healthChangeAction onHealthChange;
 
-	public delegate void coinCollectAction(int coinCoint);
+	public delegate void coinCollectAction(int coinCoint, string coinName);
 	public static event coinCollectAction onCoinCollect;
 
 	/*~~~~~~ public variables~~~~~~*/
@@ -96,9 +97,12 @@ public class PenguinController : MonoBehaviour {
 			onHealthChange(healthPass, false);
 		}
 		else if(other.tag == "coin") {
+			//Remove coin from view
 			other.transform.position = new Vector3(-100,0,0);
+			//Increment the number of coins you have
 			coins++;
-			onCoinCollect(coins);
+			//Get inform other controllers about the coin collected
+			onCoinCollect(coins, other.name);
 		}
 	}
 	

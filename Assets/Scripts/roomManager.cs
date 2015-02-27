@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 
 /*##########################################*/
@@ -95,6 +96,7 @@ public class roomManager : MonoBehaviour {
 	{
 		PenguinController.onEnterRoom += enterRoom;
 		PenguinController.onEndRoom += endRoom;
+		PenguinController.onCoinCollect += removeCoinFromRoom;
 	}
 	
 	
@@ -102,6 +104,7 @@ public class roomManager : MonoBehaviour {
 	{
 		PenguinController.onEnterRoom -= enterRoom;
 		PenguinController.onEndRoom -= endRoom;
+		PenguinController.onCoinCollect -= removeCoinFromRoom;
 	}
 
 	/*~~~~~~ public functions ~~~~~~*/
@@ -128,9 +131,16 @@ public class roomManager : MonoBehaviour {
 		onRoomChange(currentNode.roomTile);
 	}
 	
-	public void endRoom() {
+	private void endRoom() {
 		//Destroy all of the instantiated objects from the old room
 		removeOldRoomObjects();
+	}
+
+	private void removeCoinFromRoom(int coinCount, string coinName) {
+		//Get the dictionary key for the coin from the number in the object name
+		int key = int.Parse( Regex.Match(coinName, @"\d+").Value );
+		//Remove the dictionary entry that has the coin's key
+		currentNode.roomObjectsInfo.Remove (key);
 	}
 
 	private void placeNewRoomObjects(){
@@ -152,12 +162,16 @@ public class roomManager : MonoBehaviour {
 				//Increment next room index in case there is another next room trigger
 				roomTriggerIndex++;
 			}
+			//Add the dictary key to the end of the object name
+			roomObject.name = roomObject.name + dictEntry.Key;
 			currentNode.placedRoomObjects.Add (roomObject);
 		}
 	}
 	private void removeOldRoomObjects(){
 		//For every placed room object
 		foreach (GameObject roomObject in prevNode.placedRoomObjects) {
+			//Remove the Dictonary key from the object name
+			roomObject.name = Regex.Replace(roomObject.name , @"[\d-]", string.Empty);
 			//Put the object back into the queue to be reused
 			roomObjectPools[roomObject.name].Enqueue(roomObject);
 		}
