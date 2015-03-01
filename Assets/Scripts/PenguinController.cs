@@ -38,8 +38,9 @@ public class PenguinController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if (Input.GetButton ("Jump") && grounded) {
-			rigidbody2D.AddForce (jumpForce, ForceMode2D.Impulse);;
+		if (Input.GetButton ("Jump")) {
+			rigidbody2D.AddForce (jumpForce, ForceMode2D.Force);
+			//rigidbody2D.AddForce (jumpForce, ForceMode2D.Impulse);
 		}
 		rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
 	}
