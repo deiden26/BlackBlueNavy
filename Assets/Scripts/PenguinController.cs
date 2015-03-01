@@ -18,6 +18,9 @@ public class PenguinController : MonoBehaviour {
 	public delegate void coinCollectAction(int coinCoint, string coinName);
 	public static event coinCollectAction onCoinCollect;
 
+	public delegate void healthCollectAction(string healthName);
+	public static event healthCollectAction onHealthCollect;
+
 	/*~~~~~~ public variables~~~~~~*/
 
 	public float forwardVelocity;
@@ -107,6 +110,8 @@ public class PenguinController : MonoBehaviour {
 				health=100;
 			float healthPass=health;
 			onHealthChange(healthPass, false);
+			other.transform.position = new Vector3(-100,0,0);
+			onHealthCollect(other.name);
 		}
 		else if(other.tag == "coin") {
 			//Remove coin from view

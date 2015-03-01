@@ -97,6 +97,7 @@ public class roomManager : MonoBehaviour {
 		PenguinController.onEnterRoom += enterRoom;
 		PenguinController.onEndRoom += endRoom;
 		PenguinController.onCoinCollect += removeCoinFromRoom;
+		PenguinController.onHealthCollect += removeHealthFromRoom;
 	}
 	
 	
@@ -104,7 +105,7 @@ public class roomManager : MonoBehaviour {
 	{
 		PenguinController.onEnterRoom -= enterRoom;
 		PenguinController.onEndRoom -= endRoom;
-		PenguinController.onCoinCollect -= removeCoinFromRoom;
+		PenguinController.onHealthCollect -= removeHealthFromRoom;
 	}
 
 	/*~~~~~~ public functions ~~~~~~*/
@@ -140,6 +141,13 @@ public class roomManager : MonoBehaviour {
 		//Get the dictionary key for the coin from the number in the object name
 		int key = int.Parse( Regex.Match(coinName, @"\d+").Value );
 		//Remove the dictionary entry that has the coin's key
+		currentNode.roomObjectsInfo.Remove (key);
+	}
+
+	private void removeHealthFromRoom(string healthName) {
+		//Get the dictionary key for the health from the number in the object name
+		int key = int.Parse( Regex.Match(healthName, @"\d+").Value );
+		//Remove the dictionary entry that has the health's key
 		currentNode.roomObjectsInfo.Remove (key);
 	}
 
