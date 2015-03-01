@@ -22,13 +22,16 @@ public class PenguinController : MonoBehaviour {
 
 	public float forwardVelocity;
 	public Vector3 jumpForce;
+	public Vector3 jumpImpulse;
 
 	/*~~~~~~ private variables ~~~~~~*/
 
 	private bool grounded;
+	private bool canJump;
 	private float savedForwardVelocity;
 	private float health = 100;
 	private int coins = 0;
+	private int jumpCount=0;
 
 	/*~~~~~~ unity functions ~~~~~~*/
 	
@@ -38,9 +41,17 @@ public class PenguinController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if (Input.GetButton ("Jump")) {
+		if (Input.GetButton ("Jump") && grounded == true) {
+			canJump = true;
+			rigidbody2D.AddForce (jumpImpulse, ForceMode2D.Impulse);
+		}
+		if (!Input.GetButton ("Jump") || jumpCount==15) {
+			jumpCount=0;
+			canJump=false;
+		}
+		if (canJump) {
 			rigidbody2D.AddForce (jumpForce, ForceMode2D.Force);
-			//rigidbody2D.AddForce (jumpForce, ForceMode2D.Impulse);
+			jumpCount++;
 		}
 		rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
 	}
