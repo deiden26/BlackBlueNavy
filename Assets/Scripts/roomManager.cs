@@ -248,7 +248,7 @@ public class roomManager : MonoBehaviour {
 		if (endNodeIndex == currentNodeIndex)
 			endNodeIndex++;
 
-		Debug.Log ("End pipe is bottom one in " + roomNodes[endNodeIndex].roomTile);
+		//Debug.Log ("End pipe is bottom one in " + roomNodes[endNodeIndex].roomTile);
 
 		roomNodes [endNodeIndex].roomAdj.Add (levelEnd);
 
@@ -267,6 +267,10 @@ public class roomManager : MonoBehaviour {
 	private void addObjects(roomNode[] roomNodes) {
 		//For each room
 		for (int i=0; i<roomNodes.Length; i++) {
+			//Add exit sign
+			if (roomNodes[i].roomAdj[0].roomTile=="endRoom") {
+				roomNodes[i].addObjectEntry (new Vector3(roomNodes[i].roomSize-15, -3f), "endSign");
+			}
 			//Add a random number of spikes that is related to room size
 			int numObjects = (int) roomNodes[i].roomSize/20;
 			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
