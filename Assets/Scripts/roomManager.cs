@@ -210,7 +210,7 @@ public class roomManager : MonoBehaviour {
 
 	private roomNode createRooms() {
 
-		//Create 4 to 9 room nodes of random sizes and colors (with no 2 colors being the same)
+		//Create 8 room nodes of random sizes and colors (with no 2 colors being the same)
 		roomNode[] roomNodes = generateRoomNodes();
 
 		//Choose a start node and an end node
@@ -289,8 +289,8 @@ public class roomManager : MonoBehaviour {
 	}
 	
 	private roomNode[] generateRoomNodes () {
-		//Create 4 to 8 room nodes
-		int numRooms = Random.Range (4, 9);
+		//Create 8 room nodes
+		int numRooms = 8;
 		roomNode[] roomNodes = new roomNode[numRooms];
 		//Create temporary taken array
 		for (int i=0; i<numRooms; i++) {

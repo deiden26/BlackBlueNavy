@@ -68,8 +68,8 @@ public class PenguinController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if(other.gameObject.CompareTag("floor") || other.gameObject.CompareTag("platform")) {
-		   grounded = true;
+		if (other.gameObject.CompareTag ("floor") || other.gameObject.CompareTag ("platform")) {
+			grounded = true;
 		}
 	}
 
