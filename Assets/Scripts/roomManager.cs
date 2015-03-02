@@ -17,6 +17,7 @@ public class roomNode {
 	public Dictionary<int, KeyValuePair<Vector3, string>> roomObjectsInfo;
 	public List<GameObject> placedRoomObjects;
 	public int roomObjectsCount;
+	public bool isColored;
 
 	/*~~~~~~ public functions ~~~~~~*/
 	public roomNode() {
@@ -24,6 +25,7 @@ public class roomNode {
 		roomObjectsInfo = new Dictionary<int, KeyValuePair<Vector3, string>> ();
 		placedRoomObjects = new List<GameObject> ();
 		roomObjectsCount = 0;
+		isColored = false;
 	}
 
 	public void addObjectEntry(Vector3 position, string name){
@@ -64,7 +66,7 @@ public class roomManager : MonoBehaviour {
 	void Start () {
 		//Initialize levelEnd Node
 		levelEnd = new roomNode ();
-		levelEnd.roomTile = "pinkRoom";
+		levelEnd.roomTile = "endRoom";
 		levelEnd.roomSize = 100;
 
 		//Create pools of room objects
@@ -81,7 +83,8 @@ public class roomManager : MonoBehaviour {
 		roomStartPosX = 0; //Will make first room slightly too large
 		//Initialize previous node to an empty node
 		prevNode = new roomNode();
-
+		//Set first room to isColored
+		currentNode.isColored = true;
 		//Place all objects for the first room
 		placeNewRoomObjects (currentNode.roomAdj);
 		//Alert level tiler of roomTile
@@ -123,6 +126,8 @@ public class roomManager : MonoBehaviour {
 		prevNode = currentNode;
 		//Set current node to next node
 		currentNode = currentNode.roomAdj [nextRoomIndex];
+		//Set isColored
+		currentNode.isColored = true;
 		//Update roomStartPos
 		float pipeLength = roomObjectPools["pipeWhole"].Peek().renderer.bounds.size.x;
 		roomStartPosX = pipeStartPosition + pipeLength;
@@ -164,8 +169,30 @@ public class roomManager : MonoBehaviour {
 			roomObject.transform.position = roomObjectPos;
 			//If the room object is a nextRoomTrigger
 			if(roomObject.name.Contains("pipe")) {
-				if (roomAdj[roomTriggerIndex].roomTile=="redRoom")
-					roomObject.GetComponent<SpriteRenderer>().color=Color.red;
+				//see if pipe needs to be colored
+				if (roomAdj[roomTriggerIndex].isColored) {
+					Color32 pipeColor=Color.white;
+					switch (roomAdj[roomTriggerIndex].roomTile) {
+					case "pinkRoom": pipeColor=new Color32(219,53,140,255);
+						break;
+					case "blueRoom": pipeColor=new Color32(51,118,157,255);
+						break;
+					case "purpleRoom": pipeColor=new Color32(146,36,255,255);
+						break;
+					case "redRoom": pipeColor=new Color32(111,7,7,255);
+						break;
+					case "blackRoom": pipeColor=new Color32(50,50,50,255);
+						break;
+					case "yellowRoom": pipeColor=new Color32(194,201,15,255);
+						break;
+					case "greenRoom": pipeColor=new Color32(0,113,0,255);
+						break;
+					case "orangeRoom": pipeColor=new Color32(200,66,6,255);
+						break;
+					}
+					//color pipe
+					roomObject.GetComponent<SpriteRenderer>().color=pipeColor;
+				}
 				//Create a new tag with the next room index (store which room this trigger takes you too)
 				GameObject pipeStart = roomObject.transform.Find("pipeStart").gameObject;
 				pipeStart.tag = "nextRoomTrigger" + roomTriggerIndex;
