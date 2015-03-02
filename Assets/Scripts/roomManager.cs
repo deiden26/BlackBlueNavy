@@ -83,7 +83,7 @@ public class roomManager : MonoBehaviour {
 		prevNode = new roomNode();
 
 		//Place all objects for the first room
-		placeNewRoomObjects ();
+		placeNewRoomObjects (currentNode.roomAdj);
 		//Alert level tiler of roomTile
 		onRoomChange(currentNode.roomTile);
 	}
@@ -127,7 +127,7 @@ public class roomManager : MonoBehaviour {
 		float pipeLength = roomObjectPools["pipeWhole"].Peek().renderer.bounds.size.x;
 		roomStartPosX = pipeStartPosition + pipeLength;
 		//Instantiate objects for new room
-		placeNewRoomObjects ();
+		placeNewRoomObjects (currentNode.roomAdj);
 		//Alert subscribers that you have changed the room
 		onRoomChange(currentNode.roomTile);
 	}
@@ -151,7 +151,7 @@ public class roomManager : MonoBehaviour {
 		currentNode.roomObjectsInfo.Remove (key);
 	}
 
-	private void placeNewRoomObjects(){
+	private void placeNewRoomObjects(List<roomNode> roomAdj){
 		int roomTriggerIndex = 0;
 		//For each object position and prefab pair in roomObjects
 		foreach (var dictEntry in currentNode.roomObjectsInfo) {
@@ -164,6 +164,8 @@ public class roomManager : MonoBehaviour {
 			roomObject.transform.position = roomObjectPos;
 			//If the room object is a nextRoomTrigger
 			if(roomObject.name.Contains("pipe")) {
+				if (roomAdj[roomTriggerIndex].roomTile=="redRoom")
+					roomObject.GetComponent<SpriteRenderer>().color=Color.red;
 				//Create a new tag with the next room index (store which room this trigger takes you too)
 				GameObject pipeStart = roomObject.transform.Find("pipeStart").gameObject;
 				pipeStart.tag = "nextRoomTrigger" + roomTriggerIndex;
@@ -405,6 +407,8 @@ public class roomManager : MonoBehaviour {
 			else if (roomNodes[i].roomAdj.Count==2) {
 				Vector3 nextRoomTrig0Pos = new Vector3 (posX, -Camera.main.orthographicSize / 2, 0);
 				Vector3 nextRoomTrig1Pos = new Vector3 (posX, Camera.main.orthographicSize / 2, 0);
+				//roomObjectPrefabs[1].GetComponent<SpriteRenderer>.Color=Color.red;
+				//roomObjectPools["pipeHalf"].GetComponent<SpriteRenderer>.Color = Color.red;
 				roomNodes [i].addObjectEntry(nextRoomTrig0Pos, "pipeHalf");
 				roomNodes [i].addObjectEntry(nextRoomTrig1Pos, "pipeHalf");
 			}
