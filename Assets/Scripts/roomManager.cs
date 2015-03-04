@@ -271,11 +271,20 @@ public class roomManager : MonoBehaviour {
 			if (roomNodes[i].roomAdj[0].roomTile=="endRoom") {
 				roomNodes[i].addObjectEntry (new Vector3(roomNodes[i].roomSize-15, -3f), "endSign");
 			}
-			//Add a random number of spikes that is related to room size
-			int numObjects = (int) roomNodes[i].roomSize/20;
+			//Add a random number of seals that is related to room size
+			int numObjects = (int) roomNodes[i].roomSize/45;
 			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
 			float minPosition=10;
 			float maxPosition=roomNodes[i].roomSize-10;
+			for (int j=0; j<numObjects; j++) {
+				float xposition=Random.Range (minPosition, maxPosition);
+				roomNodes [i].addObjectEntry(new Vector3(xposition,-4.0f,0), "seal");
+			}
+			//Add a random number of spikes that is related to room size
+			numObjects = (int) roomNodes[i].roomSize/35;
+			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
+			minPosition=10;
+			maxPosition=roomNodes[i].roomSize-10;
 			for (int j=0; j<numObjects; j++) {
 				float xposition=Random.Range (minPosition, maxPosition);
 				roomNodes [i].addObjectEntry(new Vector3(xposition,-4.5f,0), "spikes");
@@ -287,7 +296,7 @@ public class roomManager : MonoBehaviour {
 			maxPosition=roomNodes[i].roomSize-10;
 			for (int j=0; j<numObjects; j++) {
 				float xposition=Random.Range (minPosition, maxPosition);
-				float yposition=Random.Range (-3.5f, 3.5f);
+				float yposition=Random.Range (-3.0f, 3.5f);
 				roomNodes [i].addObjectEntry(new Vector3(xposition,yposition,0), "spikeBall");
 			}
 			//Add a random number of platforms that is related to room size
