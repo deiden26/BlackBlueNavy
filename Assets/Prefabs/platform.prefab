@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 426680}
   - 212: {fileID: 21226680}
-  - 60: {fileID: 6013262}
+  - 60: {fileID: 6058724}
   m_Layer: 0
   m_Name: platform
   m_TagString: platform
@@ -29,7 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!60 &6013262
+--- !u!60 &6058724
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -40,10 +40,10 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_Poly:
     m_Paths:
-    - - {x: -2.33500004, y: .219999999}
-      - {x: -2.33500004, y: -.219999999}
-      - {x: 2.33500004, y: -.219999999}
-      - {x: 2.33500004, y: .219999999}
+    - - {x: -2.39499998, y: .219999999}
+      - {x: -2.39499998, y: -.219999999}
+      - {x: 2.39499998, y: -.219999999}
+      - {x: 2.39499998, y: .219999999}
 --- !u!212 &21226680
 SpriteRenderer:
   m_ObjectHideFlags: 1
