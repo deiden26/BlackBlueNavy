@@ -119,10 +119,6 @@ public class roomManager : MonoBehaviour {
 	/*~~~~~~ private functions ~~~~~~*/
 
 	private void enterRoom(int nextRoomIndex, float pipeStartPosition) {
-		//See if end of level
-		if (currentNode.roomAdj [nextRoomIndex] == levelEnd) {
-			Application.LoadLevel ("endLevelScene");
-		}
 		//Set current node to previous node
 		prevNode = currentNode;
 		//Set current node to next node

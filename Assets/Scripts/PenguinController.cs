@@ -154,5 +154,15 @@ public class PenguinController : MonoBehaviour {
 			onCoinCollect(coins, other.name);
 		}
 	}
+
+	/*~~~~~~ public functions ~~~~~~*/
+
+	public float getHealth() {
+		return health;
+	}
+
+	public int getCoinCount() {
+		return coins;
+	}
 	
 }

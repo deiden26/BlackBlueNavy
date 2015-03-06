@@ -52,6 +52,12 @@ public class runSceneUIManager : MonoBehaviour {
 
 	/*~~~~~~ private functions ~~~~~~*/
 
+	public float getTime() {
+		return time;
+	}
+
+	/*~~~~~~ private functions ~~~~~~*/
+
 	void changeHealth(float newHealth, bool nextLevel) {
 		if ((newHealth < healthSlider.value) && !nextLevel)
 			hurtOverlayAlpha = 1;

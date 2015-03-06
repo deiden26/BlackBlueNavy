@@ -169,7 +169,7 @@ GameObject:
   - 222: {fileID: 127739660}
   - 114: {fileID: 127739659}
   m_Layer: 5
-  m_Name: blackText
+  m_Name: score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Yay!
+  m_Text: 'Score: 0'
 --- !u!222 &127739660
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level!
+  m_Text: 
 --- !u!222 &423236019
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   - 224: {fileID: 488029973}
   - 222: {fileID: 488029974}
   m_Layer: 5
-  m_Name: blackTextHolder
+  m_Name: scoreHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ GameObject:
   - 114: {fileID: 596991522}
   - 114: {fileID: 596991521}
   m_Layer: 5
-  m_Name: continueButton
+  m_Name: playAgainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -622,7 +622,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: Play Again
 --- !u!222 &788117876
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -771,6 +771,7 @@ GameObject:
   - 114: {fileID: 1353534036}
   - 114: {fileID: 1353534035}
   - 225: {fileID: 1353534038}
+  - 114: {fileID: 1353534039}
   m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
@@ -864,6 +865,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1353534039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1353534033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0731babf065014eeab3ac2fb20890684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1668579466
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +924,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 1769771955}
   m_Layer: 5
-  m_Name: gameTitle
+  m_Name: textHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,7 +1009,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: End of
+  m_Text: High Scores
 --- !u!222 &1919987996
 CanvasRenderer:
   m_ObjectHideFlags: 0
