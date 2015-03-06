@@ -41,7 +41,7 @@ public class gameManager : MonoBehaviour {
 
 	void Update() {
 		if (Application.loadedLevelName!="runScene")
-			if (Input.GetButton ("Jump"))
-						runScene ();
+			if (Input.GetKey ("up") || Input.GetKey ("down") || Input.GetKey ("left") || Input.GetKey ("up"))
+				runScene ();
 	}
 }
