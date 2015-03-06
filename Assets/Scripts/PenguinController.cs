@@ -35,6 +35,7 @@ public class PenguinController : MonoBehaviour {
 	private float health = 100;
 	private int coins = 0;
 	private int jumpCount=0;
+	private float rotationZ=0;
 
 	/*~~~~~~ unity functions ~~~~~~*/
 	
@@ -60,7 +61,7 @@ public class PenguinController : MonoBehaviour {
 	}
 
 	void Update () {
-		transform.localRotation = new Quaternion (0, 0, 0, 0);
+		transform.localRotation = new Quaternion (0, 0, rotationZ, 0);
 	}
 
 	public void healthUpdate() {
@@ -74,11 +75,19 @@ public class PenguinController : MonoBehaviour {
 		else if (other.gameObject.CompareTag ("platformSide")) {
 			rigidbody2D.AddForce (new Vector3(0, .1f, 0), ForceMode2D.Impulse);
 		}
+		else if (other.gameObject.CompareTag ("platformBottom")) {
+			grounded=true;
+			rotationZ=180;
+		}
 	}
 
 	void OnCollisionExit2D(Collision2D other) {
-		if(other.gameObject.CompareTag("floor") || other.gameObject.CompareTag("platformTop")) {
+		if (other.gameObject.CompareTag ("floor") || other.gameObject.CompareTag ("platformTop")) {
 			grounded = false;
+		}
+		else if (other.gameObject.CompareTag ("platformBottom")) {
+			grounded=false;
+			rotationZ=0;
 		}
 	}
 	

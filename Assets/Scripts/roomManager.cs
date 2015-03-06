@@ -315,9 +315,11 @@ public class roomManager : MonoBehaviour {
 			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
 			minPosition=10;
 			maxPosition=roomNodes[i].roomSize-10;
+			//prevents too many platforms clumping together
+			float roomSpacing=(roomNodes[i].roomSize-20)/((float)numObjects);
 			roomNodes [i].addObjectEntry(new Vector3(maxPosition+5,-1f,0), "platform");
 			for (int j=0; j<(numObjects-1); j++) {
-				float xposition=Random.Range (minPosition, maxPosition);
+				float xposition=Random.Range (minPosition+j*roomSpacing, maxPosition-(numObjects-1-j)*roomSpacing-8.5f);
 				float yposition=Random.Range (-3.5f, 0f);
 				roomNodes [i].addObjectEntry(new Vector3(xposition,yposition,0), "platform");
 			}
