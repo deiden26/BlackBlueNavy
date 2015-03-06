@@ -969,6 +969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardVelocity: 8
+  forwardVelocityFast: 10
+  forwardVelocitySlow: 6
   jumpForce: {x: 0, y: 50, z: 0}
   jumpImpulse: {x: 0, y: 3, z: 0}
 --- !u!95 &1157439814

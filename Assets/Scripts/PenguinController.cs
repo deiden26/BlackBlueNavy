@@ -24,6 +24,8 @@ public class PenguinController : MonoBehaviour {
 	/*~~~~~~ public variables~~~~~~*/
 
 	public float forwardVelocity;
+	public float forwardVelocityFast;
+	public float forwardVelocitySlow;
 	public Vector3 jumpForce;
 	public Vector3 jumpImpulse;
 
@@ -31,6 +33,7 @@ public class PenguinController : MonoBehaviour {
 
 	private bool grounded;
 	private bool canJump;
+	private bool fastForward = false;
 	private float savedForwardVelocity;
 	private float health = 100;
 	private int coins = 0;
@@ -45,11 +48,12 @@ public class PenguinController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if (Input.GetButton ("Jump") && grounded == true) {
+		//Jumping
+		if (Input.GetKey ("up") && grounded == true) {
 			canJump = true;
 			rigidbody2D.AddForce (jumpImpulse, ForceMode2D.Impulse);
 		}
-		if (!Input.GetButton ("Jump") || jumpCount==15) {
+		if (!Input.GetKey ("up") || jumpCount==15) {
 			jumpCount=0;
 			canJump=false;
 		}
@@ -57,11 +61,21 @@ public class PenguinController : MonoBehaviour {
 			rigidbody2D.AddForce (jumpForce, ForceMode2D.Force);
 			jumpCount++;
 		}
+		//Dropping
 		if (Input.GetKey ("down")) {
 			rigidbody2D.AddForce (-jumpImpulse / 2, ForceMode2D.Impulse);
 			canJump=false;
 		}
-		rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
+		//Speed up / slow down
+		if (!fastForward && Input.GetKey ("right")) {
+			rigidbody2D.velocity = new Vector3 (forwardVelocityFast, rigidbody2D.velocity.y, 0);
+		}
+		else if (!fastForward && Input.GetKey ("left")) {
+			rigidbody2D.velocity = new Vector3 (forwardVelocitySlow, rigidbody2D.velocity.y, 0);
+		}
+		else {
+			rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
+		}
 	}
 
 	void Update () {
@@ -105,6 +119,7 @@ public class PenguinController : MonoBehaviour {
 			onEnterRoom(nextRoomIndexInt, other.transform.position.x);
 			//Increase speed to travel through the pipe faster
 			savedForwardVelocity = forwardVelocity;
+			fastForward = true;
 			forwardVelocity = 25;
 
 		}
@@ -112,6 +127,7 @@ public class PenguinController : MonoBehaviour {
 			onEndRoom();
 			//Decrease speed to prep user for next room
 			forwardVelocity = savedForwardVelocity;
+			fastForward = false;
 		}
 		else if(other.tag == "spikes") {
 			health = health - 10;
