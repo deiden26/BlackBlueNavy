@@ -138,8 +138,8 @@ EdgeCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Points:
-  - {x: -2.28328896, y: .234056652}
-  - {x: 2.26099849, y: .217338309}
+  - {x: -2.33901691, y: .217338294}
+  - {x: 2.33901739, y: .217338309}
 --- !u!68 &6849284
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -163,7 +163,7 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_Points:
   - {x: -2.37245369, y: -.183901682}
-  - {x: -2.37555385, y: .217338368}
+  - {x: -2.37555385, y: .317648381}
 --- !u!212 &21226680
 SpriteRenderer:
   m_ObjectHideFlags: 1

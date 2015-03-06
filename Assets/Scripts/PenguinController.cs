@@ -57,6 +57,10 @@ public class PenguinController : MonoBehaviour {
 			rigidbody2D.AddForce (jumpForce, ForceMode2D.Force);
 			jumpCount++;
 		}
+		if (Input.GetKey ("down")) {
+			rigidbody2D.AddForce (-jumpImpulse / 2, ForceMode2D.Impulse);
+			canJump=false;
+		}
 		rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
 	}
 
