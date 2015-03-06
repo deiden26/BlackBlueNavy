@@ -93,6 +93,7 @@ public class roomManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {;
+		sealController ();
 	}
 
 	void OnEnable()
@@ -204,6 +205,16 @@ public class roomManager : MonoBehaviour {
 			currentNode.placedRoomObjects.Add (roomObject);
 		}
 	}
+
+	private void sealController() {
+			foreach (GameObject roomObject in currentNode.placedRoomObjects) {
+				if (roomObject.name.Contains ("seal")) {
+					roomObject.transform.position=new Vector3(roomObject.transform.position.x-.05f, -4f, 0);
+					roomObject.collider2D.isTrigger.Equals(true);
+			}
+		}
+	}
+
 	private void removeOldRoomObjects(){
 		//For every placed room object
 		foreach (GameObject roomObject in prevNode.placedRoomObjects) {
@@ -272,7 +283,7 @@ public class roomManager : MonoBehaviour {
 				roomNodes[i].addObjectEntry (new Vector3(roomNodes[i].roomSize-15, -3f), "endSign");
 			}
 			//Add a random number of seals that is related to room size
-			int numObjects = (int) roomNodes[i].roomSize/45;
+			int numObjects = (int) roomNodes[i].roomSize/35;
 			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
 			float minPosition=10;
 			float maxPosition=roomNodes[i].roomSize-10;
