@@ -38,4 +38,10 @@ public class gameManager : MonoBehaviour {
 			loseScene ();
 		}
 	}
+
+	void Update() {
+		if (Application.loadedLevelName!="runScene")
+			if (Input.GetButton ("Jump"))
+						runScene ();
+	}
 }
