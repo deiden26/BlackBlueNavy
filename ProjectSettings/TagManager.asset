@@ -17,6 +17,9 @@ TagManager:
   - health
   - coin
   - pinkBall
+  - platformSide
+  - platformTop
+  - platformBottom
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

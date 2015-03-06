@@ -68,13 +68,16 @@ public class PenguinController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.CompareTag ("floor") || other.gameObject.CompareTag ("platform")) {
+		if (other.gameObject.CompareTag ("floor") || other.gameObject.CompareTag ("platformTop")) {
 			grounded = true;
+		}
+		else if (other.gameObject.CompareTag ("platformSide")) {
+			rigidbody2D.AddForce (new Vector3(0, .1f, 0), ForceMode2D.Impulse);
 		}
 	}
 
 	void OnCollisionExit2D(Collision2D other) {
-		if(other.gameObject.CompareTag("floor") || other.gameObject.CompareTag("platform")) {
+		if(other.gameObject.CompareTag("floor") || other.gameObject.CompareTag("platformTop")) {
 			grounded = false;
 		}
 	}
