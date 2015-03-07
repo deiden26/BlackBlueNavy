@@ -30,7 +30,7 @@ public class gameManager : MonoBehaviour {
 
 	void Update() {
 		if (Application.loadedLevelName!="runScene")
-			if (Input.GetKey ("up") || Input.GetKey ("down") || Input.GetKey ("left") || Input.GetKey ("up"))
+			if (Input.GetKey ("up") || Input.GetKey ("down") || Input.GetKey ("left") || Input.GetButton ("Jump"))
 				runScene ();
 	}
 

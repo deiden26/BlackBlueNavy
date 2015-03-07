@@ -49,11 +49,11 @@ public class PenguinController : MonoBehaviour {
 
 	void FixedUpdate () {
 		//Jumping
-		if (Input.GetKey ("up") && grounded == true) {
+		if (Input.GetButton ("Jump") && grounded == true) {
 			canJump = true;
 			rigidbody2D.AddForce (jumpImpulse, ForceMode2D.Impulse);
 		}
-		if (!Input.GetKey ("up") || jumpCount==15) {
+		if (!Input.GetButton ("Jump") || jumpCount==15) {
 			jumpCount=0;
 			canJump=false;
 		}
