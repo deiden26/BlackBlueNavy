@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class gameManager : MonoBehaviour {
@@ -30,7 +30,7 @@ public class gameManager : MonoBehaviour {
 
 	void Update() {
 		if (Application.loadedLevelName!="runScene")
-			if (Input.GetKey ("up") || Input.GetKey ("down") || Input.GetKey ("left") || Input.GetButton ("Jump"))
+			if (Input.GetKey ("up") || Input.GetKey ("down") || Input.GetKey ("left") || Input.GetKey ("right") || Input.GetButton ("Jump"))
 				runScene ();
 	}
 
