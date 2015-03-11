@@ -53,14 +53,9 @@ public class gameManager : MonoBehaviour {
 		int coinCount = penguinManager.getCoinCount();
 		float time = runSceneUIController.getTime ();
 
-		int score = (int)(coinCount * 100 + health * 10 - time * 10);
-
-		if (score < 0)
-			score = 0;
-
-		Debug.Log (score);
-
-		PlayerPrefs.SetInt("score", score);
+		PlayerPrefs.SetInt("health", (int)health);
+		PlayerPrefs.SetInt("coins", coinCount);
+		PlayerPrefs.SetInt("time", (int)time);
 
 		Application.LoadLevel ("endLevelScene");
 	}

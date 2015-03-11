@@ -75,10 +75,6 @@ public class roomManager : MonoBehaviour {
 		//generate room nodes that make up the level
 		currentNode = createRooms ();
 
-		//get floor position
-		GameObject camera = GameObject.Find ("camera");
-		GameObject floor = camera.transform.Find("floor").gameObject;
-
 		//Initialize variables to start rendering/instantiating rooms
 		roomStartPosX = 0; //Will make first room slightly too large
 		//Initialize previous node to an empty node

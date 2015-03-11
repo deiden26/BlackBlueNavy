@@ -11,8 +11,16 @@ public class endLevelSceneUIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//Get new user score
-		int score = PlayerPrefs.GetInt ("score");
+		//Get new user score data
+		int health = PlayerPrefs.GetInt("health");
+		int coinCount = PlayerPrefs.GetInt("coins");
+		int time = PlayerPrefs.GetInt("time");
+
+		//Create Score
+		int score = (int)(coinCount * 100 + health * 10 - time * 10);
+		
+		if (score < 0)
+			score = 0;
 
 		//Get user score text element
 		Text scoreText = this.transform.Find ("textHolder").transform.Find ("scoreHolder").transform.Find ("score").GetComponent<Text> ();
@@ -20,10 +28,18 @@ public class endLevelSceneUIManager : MonoBehaviour {
 		//Get high score text element
 		Text highScoresText = this.transform.Find ("textHolder").transform.Find ("highScoresHolder").transform.Find ("highScores").GetComponent<Text> ();
 
+		//Get score breakdown text element
+		Text breakDownText = this.transform.Find ("textHolder").transform.Find ("breakDownHolder").transform.Find ("breakDown").GetComponent<Text> ();
+
 		//Fill user score text element
 		string scoreString = string.Format ("Score: {0}", score);
 		scoreText.text = scoreString;
 
+		//Fill in user score breakdown
+		string breakDownString = string.Format ("+{0}x100\n+{1}x10\n-{2}x10", coinCount, health, time);
+		breakDownText.text = breakDownString;
+
+		//Fill in high score table
 		int[] highScores = new int[10];
 		bool scoreNotSet = true;
 		string highScoresString = "";
