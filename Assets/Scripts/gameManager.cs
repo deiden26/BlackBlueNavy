@@ -45,17 +45,13 @@ public class gameManager : MonoBehaviour {
 	}
 
 	public void loseScene() {
+		storeGameValues (false);
+
 		Application.LoadLevel ("loseScene");
 	}
 
 	public void endLevelScene() {
-		float health = penguinManager.getHealth();
-		int coinCount = penguinManager.getCoinCount();
-		float time = runSceneUIController.getTime ();
-
-		PlayerPrefs.SetInt("health", (int)health);
-		PlayerPrefs.SetInt("coins", coinCount);
-		PlayerPrefs.SetInt("time", (int)time);
+		storeGameValues (true);
 
 		Application.LoadLevel ("endLevelScene");
 	}
@@ -71,6 +67,19 @@ public class gameManager : MonoBehaviour {
 	private void checkForExit(string newRoomTile) {
 		if (newRoomTile == "endRoom")
 			endLevelScene ();
+	}
+
+	private void storeGameValues(bool didWin) {
+		float health = penguinManager.getHealth();
+		int coinCount = penguinManager.getCoinCount();
+		float time = runSceneUIController.getTime ();
+
+		int didWinInt = didWin ? 1 : 0;
+		
+		PlayerPrefs.SetInt("health", (int)health);
+		PlayerPrefs.SetInt("coins", coinCount);
+		PlayerPrefs.SetInt("time", (int)time);
+		PlayerPrefs.SetInt ("didWin", didWinInt);
 	}
 
 }

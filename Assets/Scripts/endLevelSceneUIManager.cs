@@ -15,9 +15,23 @@ public class endLevelSceneUIManager : MonoBehaviour {
 		int health = PlayerPrefs.GetInt("health");
 		int coinCount = PlayerPrefs.GetInt("coins");
 		int time = PlayerPrefs.GetInt("time");
+		int didWin = PlayerPrefs.GetInt ("didWin");
+
+		//Chose multiplyer values
+		int cointMult, healthMult, timeMult;
+		if (didWin == 0) {
+			cointMult = 50;
+			healthMult = 10;
+			timeMult = 20;
+		}
+		else {
+			cointMult = 100;
+			healthMult = 10;
+			timeMult = 10;
+		}
 
 		//Create Score
-		int score = (int)(coinCount * 100 + health * 10 - time * 10);
+		int score = (int)( (coinCount * cointMult) + (health * healthMult) - (time * timeMult) );
 		
 		if (score < 0)
 			score = 0;
@@ -36,7 +50,7 @@ public class endLevelSceneUIManager : MonoBehaviour {
 		scoreText.text = scoreString;
 
 		//Fill in user score breakdown
-		string breakDownString = string.Format ("+{0}x100\n+{1}x10\n-{2}x10", coinCount, health, time);
+		string breakDownString = string.Format ("+{0}x{3}\n+{1}x{4}\n-{2}x{5}", coinCount, health, time, cointMult, healthMult, timeMult);
 		breakDownText.text = breakDownString;
 
 		//Fill in high score table
