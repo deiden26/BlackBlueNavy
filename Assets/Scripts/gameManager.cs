@@ -12,20 +12,26 @@ public class gameManager : MonoBehaviour {
 	
 	void OnEnable()
 	{
-		PenguinController.onHealthChange += checkForDeath;
-		roomManager.onRoomChange += checkForExit;
+		if (Application.loadedLevelName=="runScene") {
+			PenguinController.onHealthChange += checkForDeath;
+			roomManager.onRoomChange += checkForExit;
+		}
 	}
 	
 	
 	void OnDisable()
 	{
-		PenguinController.onHealthChange -= checkForDeath;
-		roomManager.onRoomChange -= checkForExit;
+		if (Application.loadedLevelName=="runScene") {
+			PenguinController.onHealthChange -= checkForDeath;
+			roomManager.onRoomChange -= checkForExit;
+		}
 	}
 
 	void Start() {
-		penguinManager = (PenguinController)GameObject.Find ("penguin").GetComponent(typeof(PenguinController));
-		runSceneUIController = (runSceneUIManager)GameObject.Find ("canvas").GetComponent(typeof(runSceneUIManager));
+		if (Application.loadedLevelName=="runScene") {
+			penguinManager = (PenguinController)GameObject.Find ("penguin").GetComponent(typeof(PenguinController));
+			runSceneUIController = (runSceneUIManager)GameObject.Find ("canvas").GetComponent(typeof(runSceneUIManager));
+		}
 	}
 
 	void Update() {
