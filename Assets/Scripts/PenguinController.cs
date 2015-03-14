@@ -82,10 +82,6 @@ public class PenguinController : MonoBehaviour {
 		transform.localRotation = new Quaternion (0, 0, rotationZ, 0);
 	}
 
-	public void healthUpdate() {
-		health = 100;
-	}
-
 	void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.CompareTag ("floor") || other.gameObject.CompareTag ("platformTop")) {
 			grounded = true;
@@ -131,17 +127,15 @@ public class PenguinController : MonoBehaviour {
 		}
 		else if(other.tag == "spikes") {
 			health = health - 10;
-			float healthPass=health;
-			if (health<=0)
-				healthUpdate ();
-			onHealthChange(healthPass, false);
+			if (health<0)
+				health = 0;
+			onHealthChange(health, false);
 		}
 		else if(other.tag == "pinkBall") {
 			health = health + 10;
 			if (health>100)
 				health=100;
-			float healthPass=health;
-			onHealthChange(healthPass, false);
+			onHealthChange(health, false);
 			other.transform.position = new Vector3(-100,0,0);
 			onHealthCollect(other.name);
 		}

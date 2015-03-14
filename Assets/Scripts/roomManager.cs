@@ -75,10 +75,6 @@ public class roomManager : MonoBehaviour {
 		//generate room nodes that make up the level
 		currentNode = createRooms ();
 
-		//get floor position
-		GameObject camera = GameObject.Find ("camera");
-		GameObject floor = camera.transform.Find("floor").gameObject;
-
 		//Initialize variables to start rendering/instantiating rooms
 		roomStartPosX = 0; //Will make first room slightly too large
 		//Initialize previous node to an empty node
@@ -431,7 +427,7 @@ public class roomManager : MonoBehaviour {
 				//Get the index of a random room
 				int nextRoomIndex = Random.Range(0,numRooms);
 				//If the index is for the current room or for a room already in the roomAdj array
-				if (nextRoomIndex == index || roomNodes[index].roomAdj.Contains(roomNodes[nextRoomIndex]))
+				while (nextRoomIndex == index || roomNodes[index].roomAdj.Contains(roomNodes[nextRoomIndex]))
 					//Try the next room
 					nextRoomIndex = (nextRoomIndex + 1) % numRooms;
 				//Add the room to the current room adjacentcy list
