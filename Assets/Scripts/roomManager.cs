@@ -427,7 +427,7 @@ public class roomManager : MonoBehaviour {
 				//Get the index of a random room
 				int nextRoomIndex = Random.Range(0,numRooms);
 				//If the index is for the current room or for a room already in the roomAdj array
-				if (nextRoomIndex == index || roomNodes[index].roomAdj.Contains(roomNodes[nextRoomIndex]))
+				while (nextRoomIndex == index || roomNodes[index].roomAdj.Contains(roomNodes[nextRoomIndex]))
 					//Try the next room
 					nextRoomIndex = (nextRoomIndex + 1) % numRooms;
 				//Add the room to the current room adjacentcy list
