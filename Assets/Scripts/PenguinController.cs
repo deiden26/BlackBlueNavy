@@ -31,6 +31,7 @@ public class PenguinController : MonoBehaviour {
 	public AudioClip coinSound;
 	public AudioClip damageSound;
 	public AudioClip healthSound;
+	public AudioClip pipeSound;
 
 	/*~~~~~~ private variables ~~~~~~*/
 
@@ -110,6 +111,8 @@ public class PenguinController : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag.Contains("nextRoomTrigger")) {
+			//make sound
+			audio.PlayOneShot (pipeSound);
 			//Remove nextRoomTrigger part of tag to leave only the room index in the tag string
 			string nextRoomIndexString = other.tag.Remove(other.tag.IndexOf("nextRoomTrigger"), "nextRoomTrigger".Length);
 			//Parse the string as an integer

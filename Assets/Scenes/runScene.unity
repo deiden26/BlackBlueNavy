@@ -994,6 +994,7 @@ MonoBehaviour:
   coinSound: {fileID: 8300000, guid: 71bb2050d835cab4d83f4ed90ad20022, type: 3}
   damageSound: {fileID: 8300000, guid: 7ca4a86ab44ac6242b78e3c22a58f91f, type: 3}
   healthSound: {fileID: 8300000, guid: bb1235f2751c22245b4b66156c192637, type: 3}
+  pipeSound: {fileID: 8300000, guid: 867620a3df16f36449c2c3a8c903874d, type: 3}
 --- !u!95 &1157439814
 Animator:
   serializedVersion: 3

@@ -277,7 +277,7 @@ public class roomManager : MonoBehaviour {
 			//Add a random number of seals that is related to room size
 			int numObjects = (int) roomNodes[i].roomSize/35;
 			numObjects = (int) Random.Range ((int)numObjects/2f, (int)numObjects*1.5f);
-			float minPosition=10;
+			float minPosition=15;
 			float maxPosition=roomNodes[i].roomSize-10;
 			for (int j=0; j<numObjects; j++) {
 				float xposition=Random.Range (minPosition, maxPosition);
