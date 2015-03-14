@@ -906,6 +906,8 @@ GameObject:
   - 50: {fileID: 1157439812}
   - 114: {fileID: 1157439813}
   - 95: {fileID: 1157439814}
+  - 81: {fileID: 1157439816}
+  - 82: {fileID: 1157439815}
   m_Layer: 0
   m_Name: penguin
   m_TagString: Penguin
@@ -989,6 +991,9 @@ MonoBehaviour:
   forwardVelocitySlow: 6
   jumpForce: {x: 0, y: 50, z: 0}
   jumpImpulse: {x: 0, y: 3, z: 0}
+  coinSound: {fileID: 8300000, guid: 71bb2050d835cab4d83f4ed90ad20022, type: 3}
+  damageSound: {fileID: 8300000, guid: 7ca4a86ab44ac6242b78e3c22a58f91f, type: 3}
+  healthSound: {fileID: 8300000, guid: bb1235f2751c22245b4b66156c192637, type: 3}
 --- !u!95 &1157439814
 Animator:
   serializedVersion: 3
@@ -1004,6 +1009,71 @@ Animator:
   m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!82 &1157439815
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1157439808}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!81 &1157439816
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1157439808}
+  m_Enabled: 1
 --- !u!1 &1239903335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1146,6 @@ GameObject:
   - 20: {fileID: 1251084134}
   - 92: {fileID: 1251084133}
   - 124: {fileID: 1251084132}
-  - 81: {fileID: 1251084131}
   - 114: {fileID: 1251084137}
   - 50: {fileID: 1251084136}
   m_Layer: 0
@@ -1086,13 +1155,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1251084131
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1251084130}
-  m_Enabled: 1
 --- !u!124 &1251084132
 Behaviour:
   m_ObjectHideFlags: 0

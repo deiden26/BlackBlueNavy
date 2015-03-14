@@ -28,6 +28,9 @@ public class PenguinController : MonoBehaviour {
 	public float forwardVelocitySlow;
 	public Vector3 jumpForce;
 	public Vector3 jumpImpulse;
+	public AudioClip coinSound;
+	public AudioClip damageSound;
+	public AudioClip healthSound;
 
 	/*~~~~~~ private variables ~~~~~~*/
 
@@ -126,12 +129,16 @@ public class PenguinController : MonoBehaviour {
 			fastForward = false;
 		}
 		else if(other.tag == "spikes") {
+			//make sound
+			audio.PlayOneShot (damageSound);
 			health = health - 10;
 			if (health<0)
 				health = 0;
 			onHealthChange(health, false);
 		}
 		else if(other.tag == "pinkBall") {
+			//make sound
+			audio.PlayOneShot (healthSound);
 			health = health + 10;
 			if (health>100)
 				health=100;
@@ -140,6 +147,8 @@ public class PenguinController : MonoBehaviour {
 			onHealthCollect(other.name);
 		}
 		else if(other.tag == "coin") {
+			//make sound
+			audio.PlayOneShot (coinSound);
 			//Remove coin from view
 			other.transform.position = new Vector3(-100,0,0);
 			//Increment the number of coins you have
