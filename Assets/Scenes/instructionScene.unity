@@ -102,11 +102,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353534034}
-  m_RootOrder: 11
-  m_AnchorMin: {x: .0873388723, y: .41200003}
+  m_RootOrder: 12
+  m_AnchorMin: {x: .0873388723, y: .419999987}
   m_AnchorMax: {x: .122338876, y: .5}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -14}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: -8}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &39517095
 MonoBehaviour:
@@ -247,11 +247,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353534034}
-  m_RootOrder: 15
-  m_AnchorMin: {x: .0873388723, y: .064535521}
-  m_AnchorMax: {x: .122338876, y: .150803268}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -12}
+  m_RootOrder: 17
+  m_AnchorMin: {x: .0873388723, y: .0199999996}
+  m_AnchorMax: {x: .122338876, y: .100000001}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: -8}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &268690718
 MonoBehaviour:
@@ -339,8 +339,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<b>Space:</b>\t\tJump\n<b>Up:</b>\t\t\t\tJump (alternative)\n<b>Down:</b>\t\tDrop\n<b>Left:</b>\t\t\tSlow
-    down\n<b>Right:</b>\t\t\tSpeed up"
+  m_Text: "<b>Space:</b>\t\tJump\n<b>Up:</b>\t\t\tJump (alternative)\n<b>Down:</b>\t\tDrop
+    faster\n<b>Left:</b>\t\t\tSlow down\n<b>Right:</b>\t\tSpeed up"
 --- !u!222 &306725128
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -375,11 +375,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353534034}
-  m_RootOrder: 12
-  m_AnchorMin: {x: .0873388723, y: .323732257}
-  m_AnchorMax: {x: .122338876, y: .41200003}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -14}
+  m_RootOrder: 13
+  m_AnchorMin: {x: .0873388723, y: .340000004}
+  m_AnchorMax: {x: .122338876, y: .419999987}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: -8}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &408048056
 MonoBehaviour:
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .0182554796, g: .00551471114, b: .375, a: 1}
+  m_Color: {r: .271139711, g: .405362576, b: .625, a: 1}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -498,10 +498,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1353534034}
   m_RootOrder: 6
-  m_AnchorMin: {x: .160437927, y: .41200003}
+  m_AnchorMin: {x: .160437927, y: .419999987}
   m_AnchorMax: {x: .45166117, y: .5}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -10}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &542960979
 MonoBehaviour:
@@ -528,7 +528,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Collect coins to get a high score. Coins are contribute most to your score.
+  m_Text: Collect coins to get a high score. Coins contribute most to your score.
 --- !u!222 &542960980
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -564,10 +564,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1353534034}
   m_RootOrder: 8
-  m_AnchorMin: {x: .160437927, y: .23626776}
-  m_AnchorMax: {x: .45166117, y: .323732257}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -10}
+  m_AnchorMin: {x: .160437927, y: .25999999}
+  m_AnchorMax: {x: .45166117, y: .340000004}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &612820371
 MonoBehaviour:
@@ -594,8 +594,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Avoid enemies and hazards. Hitting an enemy will decrease your health by
-    10.
+  m_Text: Avoid enemy seals and spikes. They will decrease your health by 10%.
 --- !u!222 &612820372
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -631,10 +630,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1353534034}
   m_RootOrder: 9
-  m_AnchorMin: {x: .160437927, y: .150803268}
-  m_AnchorMax: {x: .45166117, y: .23626776}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -10}
+  m_AnchorMin: {x: .160437927, y: .180000007}
+  m_AnchorMax: {x: .45166117, y: .25999999}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &827496830
 MonoBehaviour:
@@ -661,13 +660,74 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Travel between rooms in pipes.There is only one room of each color.
+  m_Text: Travel between rooms via pipes to navigate through a maze.
 --- !u!222 &827496831
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 827496828}
+--- !u!1 &876471280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 876471283}
+  - 222: {fileID: 876471282}
+  - 114: {fileID: 876471281}
+  m_Layer: 5
+  m_Name: takenPipe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &876471281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876471280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .153276399, g: .772058845, b: .28556779, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e1752e3e8d56b44eeb1ff31f0c2ec1cc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &876471282
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876471280}
+--- !u!224 &876471283
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 876471280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353534034}
+  m_RootOrder: 16
+  m_AnchorMin: {x: .0873388723, y: .100000001}
+  m_AnchorMax: {x: .122338876, y: .180000007}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: -8}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1 &938784766
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,11 +756,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353534034}
-  m_RootOrder: 10
-  m_AnchorMin: {x: .160437927, y: .064535521}
-  m_AnchorMax: {x: .45166117, y: .150803268}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -10}
+  m_RootOrder: 11
+  m_AnchorMin: {x: .160437927, y: .0199999996}
+  m_AnchorMax: {x: .45166117, y: .100000001}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &938784768
 MonoBehaviour:
@@ -727,7 +787,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Find the exit pipe to win. You get a higher score when you exit.
+  m_Text: Find the exit pipe to end the game. Time plays a factor in your score.
 --- !u!222 &938784769
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -791,11 +851,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353534034}
-  m_RootOrder: 14
-  m_AnchorMin: {x: .0873388723, y: .150803268}
-  m_AnchorMax: {x: .122338876, y: .23626776}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -14}
+  m_RootOrder: 15
+  m_AnchorMin: {x: .0873388723, y: .180000007}
+  m_AnchorMax: {x: .122338876, y: .25999999}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: -8}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &993843689
 MonoBehaviour:
@@ -951,6 +1011,72 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1273797806}
+--- !u!1 &1338308897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1338308898}
+  - 222: {fileID: 1338308900}
+  - 114: {fileID: 1338308899}
+  m_Layer: 5
+  m_Name: pipeTakenInstructions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1338308898
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338308897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353534034}
+  m_RootOrder: 10
+  m_AnchorMin: {x: .160437927, y: .100000001}
+  m_AnchorMax: {x: .45166117, y: .180000007}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1338308899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338308897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 1
+    m_MaxSize: 100
+    m_Alignment: 3
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Visit a room, and the corresponding pipes will change color.
+--- !u!222 &1338308900
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338308897}
 --- !u!1 &1353534033
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,11 +1116,13 @@ RectTransform:
   - {fileID: 1820106065}
   - {fileID: 612820370}
   - {fileID: 827496829}
+  - {fileID: 1338308898}
   - {fileID: 938784767}
   - {fileID: 39517094}
   - {fileID: 408048055}
   - {fileID: 2129694219}
   - {fileID: 993843688}
+  - {fileID: 876471283}
   - {fileID: 268690717}
   - {fileID: 1901379534}
   m_Father: {fileID: 0}
@@ -1342,10 +1470,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1353534034}
   m_RootOrder: 7
-  m_AnchorMin: {x: .160437927, y: .323732257}
-  m_AnchorMax: {x: .45166117, y: .41200003}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -10}
+  m_AnchorMin: {x: .160437927, y: .340000004}
+  m_AnchorMax: {x: .45166117, y: .419999987}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1820106066
 MonoBehaviour:
@@ -1410,7 +1538,7 @@ RectTransform:
   m_Children:
   - {fileID: 1543834611}
   m_Father: {fileID: 1353534034}
-  m_RootOrder: 16
+  m_RootOrder: 18
   m_AnchorMin: {x: .0106777418, y: .915000021}
   m_AnchorMax: {x: .170694336, y: .986638367}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1597,11 +1725,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1353534034}
-  m_RootOrder: 13
-  m_AnchorMin: {x: .0873388723, y: .23626776}
-  m_AnchorMax: {x: .122338876, y: .323732257}
-  m_AnchoredPosition: {x: -27, y: 3}
-  m_SizeDelta: {x: 0, y: -14}
+  m_RootOrder: 14
+  m_AnchorMin: {x: .0873388723, y: .25999999}
+  m_AnchorMax: {x: .122338876, y: .340000004}
+  m_AnchoredPosition: {x: -27, y: 0}
+  m_SizeDelta: {x: 0, y: -8}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2129694220
 MonoBehaviour:
