@@ -6,34 +6,37 @@ public class gameManager : MonoBehaviour {
 	/*~~~~~~ private variables ~~~~~~*/
 	PenguinController penguinManager;
 	runSceneUIManager runSceneUIController;
-	GameObject instrBox;
 
 
 	/*~~~~~~ unity functions ~~~~~~*/
 	
 	void OnEnable()
 	{
-		PenguinController.onHealthChange += checkForDeath;
-		roomManager.onRoomChange += checkForExit;
+		if (Application.loadedLevelName=="runScene") {
+			PenguinController.onHealthChange += checkForDeath;
+			roomManager.onRoomChange += checkForExit;
+		}
 	}
 	
 	
 	void OnDisable()
 	{
-		PenguinController.onHealthChange -= checkForDeath;
-		roomManager.onRoomChange -= checkForExit;
+		if (Application.loadedLevelName=="runScene") {
+			PenguinController.onHealthChange -= checkForDeath;
+			roomManager.onRoomChange -= checkForExit;
+		}
 	}
 
 	void Start() {
-		penguinManager = (PenguinController)GameObject.Find ("penguin").GetComponent(typeof(PenguinController));
-		runSceneUIController = (runSceneUIManager)GameObject.Find ("canvas").GetComponent(typeof(runSceneUIManager));
-		instrBox = GameObject.FindWithTag("instrBox");
-		instrBox.transform.localScale = new Vector3 (0, 1, 1);
+		if (Application.loadedLevelName=="runScene") {
+			penguinManager = (PenguinController)GameObject.Find ("penguin").GetComponent(typeof(PenguinController));
+			runSceneUIController = (runSceneUIManager)GameObject.Find ("canvas").GetComponent(typeof(runSceneUIManager));
+		}
 	}
 
 	void Update() {
 		if (Application.loadedLevelName!="runScene")
-			if (Input.GetKey ("up") || Input.GetKey ("down") || Input.GetKey ("left") || Input.GetKey ("right") || Input.GetButton ("Jump"))
+			if (Input.GetKey ("enter") || Input.GetKey("return"))
 				runScene ();
 	}
 
@@ -43,35 +46,22 @@ public class gameManager : MonoBehaviour {
 		Application.LoadLevel ("startScene");
 	}
 
+	public void instructionScene() {
+		Application.LoadLevel ("instructionScene");
+	}
+
 	public void runScene() {
 		Application.LoadLevel ("runScene");
 	}
 
 	public void loseScene() {
+		storeGameValues (false);
+
 		Application.LoadLevel ("loseScene");
 	}
 
-	public void hideInstructions () {
-		instrBox.transform.localScale = new Vector3 (0, 1, 1);
-	}
-
-	public void showInstructions () {
-		instrBox.transform.localScale = new Vector3 (1, 1, 1);
-	}
-
 	public void endLevelScene() {
-		float health = penguinManager.getHealth();
-		int coinCount = penguinManager.getCoinCount();
-		float time = runSceneUIController.getTime ();
-
-		int score = (int)(coinCount * 100 + health * 10 - time * 10);
-
-		if (score < 0)
-			score = 0;
-
-		Debug.Log (score);
-
-		PlayerPrefs.SetInt("score", score);
+		storeGameValues (true);
 
 		Application.LoadLevel ("endLevelScene");
 	}
@@ -87,6 +77,19 @@ public class gameManager : MonoBehaviour {
 	private void checkForExit(string newRoomTile) {
 		if (newRoomTile == "endRoom")
 			endLevelScene ();
+	}
+
+	private void storeGameValues(bool didWin) {
+		float health = penguinManager.getHealth();
+		int coinCount = penguinManager.getCoinCount();
+		float time = runSceneUIController.getTime ();
+
+		int didWinInt = didWin ? 1 : 0;
+		
+		PlayerPrefs.SetInt("health", (int)health);
+		PlayerPrefs.SetInt("coins", coinCount);
+		PlayerPrefs.SetInt("time", (int)time);
+		PlayerPrefs.SetInt ("didWin", didWinInt);
 	}
 
 }
