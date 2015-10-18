@@ -50,6 +50,10 @@ public class gameManager : MonoBehaviour {
 		Application.LoadLevel ("instructionScene");
 	}
 
+	public void instructionMobileScene() {
+		Application.LoadLevel ("instructionMobileScene");
+	}
+
 	public void runScene() {
 		Application.LoadLevel ("runScene");
 	}

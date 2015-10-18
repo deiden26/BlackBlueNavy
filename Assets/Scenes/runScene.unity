@@ -986,6 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2127714a1db64cd5b30064ab408a38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMobile: 1
   forwardVelocity: 8
   forwardVelocityFast: 10
   forwardVelocitySlow: 6
@@ -995,6 +996,7 @@ MonoBehaviour:
   damageSound: {fileID: 8300000, guid: 7ca4a86ab44ac6242b78e3c22a58f91f, type: 3}
   healthSound: {fileID: 8300000, guid: bb1235f2751c22245b4b66156c192637, type: 3}
   pipeSound: {fileID: 8300000, guid: 867620a3df16f36449c2c3a8c903874d, type: 3}
+  dragDistance: 0
 --- !u!95 &1157439814
 Animator:
   serializedVersion: 3

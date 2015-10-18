@@ -22,7 +22,7 @@ public class endLevelSceneUIManager : MonoBehaviour {
 		if (didWin == 0) {
 			cointMult = 50;
 			healthMult = 10;
-			timeMult = 20;
+			timeMult = 10;
 		}
 		else {
 			cointMult = 100;
