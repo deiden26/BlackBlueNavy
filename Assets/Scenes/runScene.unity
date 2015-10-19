@@ -262,7 +262,7 @@ RectTransform:
   - {fileID: 698161037}
   m_Father: {fileID: 456145436}
   m_RootOrder: 2
-  m_AnchorMin: {x: .0199999996, y: .800000012}
+  m_AnchorMin: {x: .0199999996, y: .850000024}
   m_AnchorMax: {x: .300000012, y: .980000019}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
