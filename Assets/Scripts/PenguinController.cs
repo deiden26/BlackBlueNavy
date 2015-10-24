@@ -23,6 +23,7 @@ public class PenguinController : MonoBehaviour {
 
 	/*~~~~~~ public variables~~~~~~*/
 
+	public bool isMobile;
 	public float forwardVelocity;
 	public float forwardVelocityFast;
 	public float forwardVelocitySlow;
@@ -44,41 +45,85 @@ public class PenguinController : MonoBehaviour {
 	private int jumpCount=0;
 	private float rotationZ=0;
 
+	/*~~~~~~ mobile variables ~~~~~~*/
+
+	private Vector3 fp;
+	private Vector3 lp;
+	public float dragDistance;
+	private bool canDrop;
+
 	/*~~~~~~ unity functions ~~~~~~*/
 	
 	void Start () {
 		rigidbody2D.velocity = new Vector3 (1, 0, 0) * forwardVelocity;
 		onHealthChange(health, true);
+		canDrop = false;
 	}
 
 	void FixedUpdate () {
-		//Jumping
-		if (Input.GetButton ("Jump") && grounded == true) {
-			canJump = true;
-			rigidbody2D.AddForce (jumpImpulse, ForceMode2D.Impulse);
-		}
-		if (!Input.GetButton ("Jump") || jumpCount==15) {
-			jumpCount=0;
-			canJump=false;
-		}
-		if (canJump) {
-			rigidbody2D.AddForce (jumpForce, ForceMode2D.Force);
-			jumpCount++;
-		}
-		//Dropping
-		if (Input.GetKey ("down")) {
-			rigidbody2D.AddForce (-jumpImpulse / 2, ForceMode2D.Impulse);
-			canJump=false;
-		}
-		//Speed up / slow down
-		if (!fastForward && Input.GetKey ("right")) {
-			rigidbody2D.velocity = new Vector3 (forwardVelocityFast, rigidbody2D.velocity.y, 0);
-		}
-		else if (!fastForward && Input.GetKey ("left")) {
-			rigidbody2D.velocity = new Vector3 (forwardVelocitySlow, rigidbody2D.velocity.y, 0);
-		}
-		else {
+
+		if (isMobile) {
+
+			foreach (Touch touch in Input.touches)
+			{
+				//Jumping
+				if (touch.phase==TouchPhase.Stationary && grounded==true)
+				{
+					canJump = true;
+					rigidbody2D.AddForce (jumpImpulse, ForceMode2D.Impulse);
+					canDrop=false;
+				}
+				if (touch.phase==TouchPhase.Ended || jumpCount==15)
+				{
+					jumpCount=0;
+					canJump=false;
+				}
+				if (canJump)
+				{
+					rigidbody2D.AddForce (jumpForce, ForceMode2D.Force);
+					jumpCount++;
+				}
+
+				//Dropping
+				if(touch.phase == TouchPhase.Began && canJump==false)
+				{
+					canDrop=true;
+				}
+				if (touch.phase == TouchPhase.Stationary && grounded==false && canJump==false && canDrop==true)
+				{
+					rigidbody2D.AddForce (-jumpImpulse / 2, ForceMode2D.Impulse);
+				}
+			}
+
 			rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
+
+		} else {
+			//Jumping
+			if (Input.GetButton ("Jump") && grounded == true) {
+				canJump = true;
+				rigidbody2D.AddForce (jumpImpulse, ForceMode2D.Impulse);
+			}
+			if (!Input.GetButton ("Jump") || jumpCount == 15) {
+				jumpCount = 0;
+				canJump = false;
+			}
+			if (canJump) {
+				rigidbody2D.AddForce (jumpForce, ForceMode2D.Force);
+				jumpCount++;
+			}
+			//Dropping
+			if (Input.GetKey ("down")) {
+				rigidbody2D.AddForce (-jumpImpulse / 2, ForceMode2D.Impulse);
+				canJump = false;
+			}
+			//Speed up / slow down
+			if (!fastForward && Input.GetKey ("right")) {
+				rigidbody2D.velocity = new Vector3 (forwardVelocityFast, rigidbody2D.velocity.y, 0);
+			} else if (!fastForward && Input.GetKey ("left")) {
+				rigidbody2D.velocity = new Vector3 (forwardVelocitySlow, rigidbody2D.velocity.y, 0);
+			} else {
+				rigidbody2D.velocity = new Vector3 (forwardVelocity, rigidbody2D.velocity.y, 0);
+			}
 		}
 	}
 
