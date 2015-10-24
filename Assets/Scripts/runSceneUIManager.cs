@@ -24,7 +24,7 @@ public class runSceneUIManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (hurtOverlayAlpha != 0) {
+		if (hurtOverlayAlpha > 0) {
 			Color newColor = hurtOverlay.color;
 			newColor.a = hurtOverlayAlpha;
 			hurtOverlay.color = newColor;
