@@ -7,7 +7,7 @@ PlayerSettings:
   AndroidProfiler: 0
   defaultScreenOrientation: 3
   targetDevice: 2
-  targetGlesGraphics: 1
+  targetGlesGraphics: -1
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: DEGames
@@ -71,10 +71,10 @@ PlayerSettings:
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: 1c0e2804691b24f2f8e1ae1c086c15a6
-  iPhoneBundleVersion: 1.0
-  AndroidBundleVersionCode: 1
+  iPhoneBundleVersion: 1.01
+  AndroidBundleVersionCode: 101
   AndroidMinSdkVersion: 9
-  AndroidPreferredInstallLocation: 1
+  AndroidPreferredInstallLocation: 0
   aotOptions: 
   apiCompatibilityLevel: 2
   iPhoneStrippingLevel: 0
